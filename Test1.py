@@ -12,7 +12,7 @@ import streamlit as st
 
 # Streamlit
 st.title('A Simple Supply Chain Dynamics Simulator')
-st.write('Version 1.0')
+st.write('Version 0.5')
 
 #Add a selectbox to the sidebar:
 Select_FillPolicy = st.sidebar.selectbox(
