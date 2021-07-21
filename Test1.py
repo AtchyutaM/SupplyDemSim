@@ -67,7 +67,7 @@ with right_column2:
     st.write(f"You choose {chosenprodstages} Production Stages")
 
 ##
-    
+chosencusts = int(chosencusts)    
 st.header('Parameters for Selected Policies:')    
 
 st.subheader('Start Strategy:')
@@ -402,9 +402,9 @@ for i in range(len(row_names)):
 print(Prod1_Supply)
 print(Prod2_Supply)     
 print(dem_cust1_prod1)
-print(dem_cust2_prod1)
+#print(dem_cust2_prod1)
 print(dem_cust1_prod2)
-print(dem_cust2_prod2)
+#print(dem_cust2_prod2)
 print(Inv_Prod1)
 print(Inv_Prod2)
 print(FillStrat_prod1)
