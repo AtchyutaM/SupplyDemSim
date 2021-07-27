@@ -71,7 +71,7 @@ chosencusts = int(chosencusts)
 st.header('Parameters for Selected Policies:')    
 
 st.subheader('Start Strategy:')
-st.write('Choosen Start Strategy', 'is', Select_StartStrategy)
+st.write('Choosen Start Strategy:', 'is', Select_StartStrategy)
 left_column3, right_column3 = st.beta_columns(2)
 # You can use a column just like st.sidebar:
 with left_column3:
