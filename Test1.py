@@ -140,7 +140,7 @@ IntialInv = [10,10]
 IntialInv_Stage_Prod1 = [0,0,0]
 IntialInv_Stage2_prod2 = [0,0,0]  
 
-# create demand data frame 
+# create demand data frames 
 Demand_stages = ["Period-1","Period-2","Period-3"]
 Demand_stages = Demand_stages[0:chosenprodstages]
 column_names_dem = Demand_stages
@@ -151,18 +151,15 @@ row_names_dem = ["Period 0","Period 1", "Period 2", "Period 3", "Period 4","Peri
              "Period 7", "Period 8", "Period 9", "Period 10"]
 row_names_dem = row_names[0:chosentime+1]
 zero_data_dem = np.zeros(shape=(len(row_names_dem),len(column_names_dem)))
-dem_cust1_prod1 = pd.DataFrame(zero_data_dem,row_names_dem, column_names_dem)
-#print(dem_cust1_prod1)
 
+
+dem_cust1_prod1 = pd.DataFrame(zero_data_dem,row_names_dem, column_names_dem)
 dem_cust1_prod2 = pd.DataFrame(zero_data_dem,row_names_dem, column_names_dem)
 #print(dem_cust1_prod2)
 
-if chosencusts > 1:
-    dem_cust2_prod1 = pd.DataFrame(zero_data_dem,row_names_dem, column_names_dem)
-    #print(dem_cust2_prod1)
-    
-    dem_cust2_prod2 = pd.DataFrame(zero_data_dem,row_names_dem, column_names_dem)
-    #print(dem_cust2_prod2)
+#if chosencusts > 1:
+dem_cust2_prod1 = pd.DataFrame(zero_data_dem,row_names_dem, column_names_dem)
+dem_cust2_prod2 = pd.DataFrame(zero_data_dem,row_names_dem, column_names_dem)
 
 
 # Create Fill Strategy dataframe
