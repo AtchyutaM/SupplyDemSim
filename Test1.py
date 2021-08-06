@@ -80,6 +80,9 @@ with left_column3:
     0, 20)
     #st.write(f"You choose {chosenStarts} Fixed Starts for each product")
 
+st.subheader('Initial Inventory:')
+st.write('Initial invntory currently fixed at 10 units for each product - Under development')
+
 st.subheader('Fill policy:')
 st.write('Choosen Fill policy', 'is:', Select_FillPolicy)
 
