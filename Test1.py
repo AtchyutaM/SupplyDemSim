@@ -4,6 +4,7 @@ Created on Mon Jan  4 11:18:53 2021
 
 @author: atchyuta
 """
+## Bring in data
 
 import pandas as pd
 import numpy as np
@@ -52,22 +53,21 @@ with right_column:
 
 
 left_column2, right_column2 = st.beta_columns(2)
-# You can use a column just like st.sidebar:
 with left_column2:
     chosentime =  st.slider(
     'Choose Number of Time Periods',
     0, 10)
     st.write(f"You choose {chosentime} Time Periods")
 
-# Or even better, call Streamlit functions inside a "with" block:
 with right_column2:
     chosenprodstages = st.radio(
         'Choose Number of Production Stages',
         ("1", "2", "3"))
     st.write(f"You choose {chosenprodstages} Production Stages")
 
-##
-chosencusts = int(chosencusts)    
+## The program
+chosencusts = int(chosencusts)  
+chosenprods = int(chosenprods)  
 st.header('Parameters for Selected Policies:')    
 
 st.subheader('Start Strategy:')
@@ -262,10 +262,12 @@ if chosencusts > 1:
 #FGI_prod1 = np.zeros(shape=(len(row_names),1), dtype=int)
 #FGI_Prod2 = np.zeros(shape=(len(row_names),1), dtype=int)
 
-column_names_inv = ["Inv","Demand_c1", "Fullfilled_c1", "Backorders_c1", "Demand_c2", "Fullfilled_c2", "Backorders_c2","FGI"]
-
+column_names_inv = ["Inv","Demand_c1", "Fullfilled_c1", "Backorders_c1","FGI"]
+if chosencusts > 1:
+    column_names_inv = ["Inv","Demand_c1", "Fullfilled_c1", "Backorders_c1", "Demand_c2", "Fullfilled_c2", "Backorders_c2","FGI"]
 row_names_inv = ["Period 0","Period 1", "Period 2", "Period 3", "Period 4","Period 5", "Period 6",
              "Period 7", "Period 8", "Period 9", "Period 10"]
+row_names_inv = row_names_inv[0:chosentime+1]
 zero_data_inv = np.zeros(shape=(len(row_names_inv),len(column_names_inv)))
 Inv_Prod1 = pd.DataFrame(zero_data_inv,row_names_inv, column_names_inv)
 #print(Inv_Prod1)
@@ -279,15 +281,19 @@ FGI = np.zeros(shape=(len(row_names),1), dtype=int)
 column_names_StartStrat = ["Start Prod1","Start Prod2"]
 row_names_StartStrat = ["Period 0","Period 1", "Period 2", "Period 3", "Period 4","Period 5", "Period 6",
              "Period 7", "Period 8", "Period 9", "Period 10"]
+row_names_StartStrat = row_names_StartStrat[0:chosentime+1]
 zero_data_StartStrat = np.zeros(shape=(len(row_names_StartStrat),len(column_names_StartStrat)))
 df_StartStrat = pd.DataFrame(zero_data_StartStrat,row_names_StartStrat, column_names_StartStrat)
 #print(df_StartStrat)
 
 
 # Fill stategy
-column_names_FillStrat = ["Fill Cust1","Fill Cust2"]
+column_names_FillStrat = ["Fill Cust1"]
+if chosencusts > 1:
+    column_names_FillStrat = ["Fill Cust1","Fill Cust2"]
 row_names_FillStrat = ["Period 0","Period 1", "Period 2", "Period 3", "Period 4","Period 5", "Period 6",
              "Period 7", "Period 8", "Period 9", "Period 10"]
+row_names_FillStrat = row_names_FillStrat[0:chosentime+1]
 zero_data_FillStrat = np.zeros(shape=(len(row_names_FillStrat),len(column_names_FillStrat)))
 FillStrat_prod1 = pd.DataFrame(zero_data_FillStrat,row_names_FillStrat, column_names_FillStrat)
 #print(FillStrat_prod1)
@@ -393,119 +399,54 @@ for i in range(len(row_names)):
           if chosencusts > 1:
               Inv_Prod2['Backorders_c2'] [i] = max(Inv_Prod2['Demand_c2'] [i] - Inv_Prod2['Fullfilled_c2'] [i], 0)
           
-          Inv_Prod1['FGI'][i] =  Inv_Prod1["Inv"][i] -  Inv_Prod1['Fullfilled_c1'] [i] - Inv_Prod1['Fullfilled_c2'] [i]
-          Inv_Prod2['FGI'][i] =  Inv_Prod2["Inv"][i] -  Inv_Prod2['Fullfilled_c1'] [i] - Inv_Prod2['Fullfilled_c2'] [i]
+          Inv_Prod1['FGI'][i] =  Inv_Prod1["Inv"][i] -  Inv_Prod1['Fullfilled_c1'] [i]
+          Inv_Prod2['FGI'][i] =  Inv_Prod2["Inv"][i] -  Inv_Prod2['Fullfilled_c1'] [i]
+          if chosencusts > 1:
+              Inv_Prod1['FGI'][i] =  Inv_Prod1["Inv"][i] -  Inv_Prod1['Fullfilled_c1'] [i] - Inv_Prod1['Fullfilled_c2'] [i]
+              Inv_Prod2['FGI'][i] =  Inv_Prod2["Inv"][i] -  Inv_Prod2['Fullfilled_c1'] [i] - Inv_Prod2['Fullfilled_c2'] [i]
           
 print(Prod1_Supply)
 print(Prod2_Supply)     
 print(dem_cust1_prod1)
-#print(dem_cust2_prod1)
+print(dem_cust2_prod1)
 print(dem_cust1_prod2)
-#print(dem_cust2_prod2)
+print(dem_cust2_prod2)
 print(Inv_Prod1)
 print(Inv_Prod2)
 print(FillStrat_prod1)
 print(FillStrat_prod2)
 
 
-          
-        
-              
-              
-              
-                            
-              
-              
-          
-        
-        
-                
-            
-            
-#             df.iloc[i,0] = 10
-            
-    
-
-
-# # Python index starts from 0
-# for i in range(len(row_names)):
-#     for j in range(len(column_names)):
-#         #df[j][i]
-#         if j == 0: # Releases
-#             df.iloc[i,j] = 10
-#         elif j == 4: # Inv
-#              if i ==0 :
-#                  df.iloc[i,j] =0;
-#              else:
-#                  df.iloc[i,j] = df.iloc[i-1][j]+ df.iloc[i][j-1]*p_move
-#         elif j == 1: # stage 1
-#             if i ==0: # if period 1clc
-#                  df.iloc[i,j] = df.iloc[i,j-1]
-#             else: # not period 1
-#                 # at stage 1 and period 1 in a period, releases in this period + what ever was left behind from previous period
-#                 df.iloc[i,j] = df.iloc[i,j-1] + df.iloc[i-1,j]*p_sit
-#         else: # any other stage
-#             if i == 0: # in period 1
-#                 df.iloc[i,j] = 0
-#             else: # in any otehr period
-#             # whatever has stayed from previous period same stage+ whatever has moved from pervious period previous stage
-#                 df.iloc[i,j] = df.iloc[i-1,j]* p_sit + df.iloc[i-1,j-1]* p_move
-# print(df)
-
-#improvement options - use iterrows and itter tuples doe speed if needed 
-
-# demand logic
-
-# #probs_demand
-# p_sit_dem = 0.2
-# p_move_dem = 0.7
-# p_scarp_dem = 0.1
-
-
-# # create demand data frame 
-# # separte for now - but we can integrate into the for loop
-# column_names_dem = ["Period Now","Next Period 1","Next Period 2","Next Period 3"]
-# row_names_dem = ["Demand"]
-# zero_data_dem = np.zeros(shape=(len(row_names_dem),len(column_names_dem)))
-# df_dem = pd.DataFrame(zero_data_dem,row_names_dem, column_names_dem)
-# print(df_dem)
-
-# for i in range(len(row_names_dem)):
-#     for j in range(len(column_names_dem)):
-#     # first step is to compute and move demands
-#         if j == 0:
-#             Real_demand = df.iloc[i,j] # these will all be integarted into one for loop
-#             df_dem.iloc[i,j]= df_dem.iloc[i,j]*p_sit_dem + df_dem.iloc[i,j+1]*p_move_dem # generate the next periods real demand
-#         elif j<len(column_names_dem)-2:
-#             df_dem.iloc[i,j]= df_dem.iloc[i,j]*p_sit_dem + df_dem.iloc[i,j+1]*p_move_dem
-#         else:
-#             df_dem.iloc[i,j]= df_dem.iloc[i,j]*p_sit_dem + 10 # for now lets generate 10 units of demand determinitsically
-
-# print(df_dem)
-
+# display output:
             
 st.header("Supply Data")
 st.write('Product 1')
 st.table(Prod1_Supply)
-st.write('Product 2')
-st.table(Prod2_Supply)
+
+if chosenprods >1:
+    st.write('Product 2')
+    st.table(Prod2_Supply)
 
 
 st.header("Demand Data")
 st.write('Customer 1 Demand product 1')
 st.table(dem_cust1_prod1)
-st.write('Customer 1 Demand product 2')
-st.table(dem_cust1_prod2)
-st.write('Customer 2 Demand product 1')
-st.table(dem_cust2_prod1)
-st.write('Customer 2 Demand product 2')
-st.table(dem_cust2_prod2)
+if chosenprods > 1:
+    st.write('Customer 1 Demand product 2')
+    st.table(dem_cust1_prod2)
+if chosencusts >1:
+    st.write('Customer 2 Demand product 1')
+    st.table(dem_cust2_prod1)
+if chosenprods > 1 and chosencusts > 1:
+        st.write('Customer 2 Demand product 2')
+        st.table(dem_cust2_prod2)
 
 st.header("Inv Data")
 st.write('Prod 1 Inv Data')
 st.table(Inv_Prod1)
-st.write('Prod 2 Inv Data')
-st.table(Inv_Prod2)
+if chosenprods > 1:
+    st.write('Prod 2 Inv Data')
+    st.table(Inv_Prod2)
 
 #st.write("Demand Data")
 #st.table('Customer 1 Demand product 1',dem_cust1_prod1)
