@@ -380,7 +380,7 @@ st.write('Customer 1 Demand product 1')
 st.table(dem_cust1_prod1)
 if chosenprods > 1:
     st.write('Customer 1 Demand product 2')
-st.table(dem_cust1_prod2)
+    st.table(dem_cust2_prod2)
 if chosencusts >1:
     st.write('Customer 2 Demand product 1')
     st.table(dem_cust2_prod1)
