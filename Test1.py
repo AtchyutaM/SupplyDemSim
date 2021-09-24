@@ -23,7 +23,7 @@ Select_FillPolicy = st.sidebar.selectbox(
 
 Select_StartStrategy = st.sidebar.selectbox(
   'Select Start Strategy',
-    ( 'Fixed Starts','Releases equal to demand')
+    ( 'Fixed Starts','CONWIP')
 )
 
 
@@ -72,13 +72,24 @@ st.header('Parameters for Selected Policies:')
 
 st.subheader('Start Strategy:')
 st.write('Choosen Start Strategy:', 'is', Select_StartStrategy)
-left_column3, right_column3 = st.beta_columns(2)
-# You can use a column just like st.sidebar:
-with left_column3:
-    chosenStarts =  st.slider(
-    'Select Number of Fixed Starts',
-    0, 20)
-    #st.write(f"You choose {chosenStarts} Fixed Starts for each product")
+
+if Select_StartStrategy == "Fixed Starts":
+    left_column3, right_column3 = st.beta_columns(2)
+    # You can use a column just like st.sidebar:
+    with left_column3:
+        chosenStarts =  st.slider(
+        'Select Number of Fixed Starts',
+        0, 20)
+        #st.write(f"You choose {chosenStarts} Fixed Starts for each product")
+
+if Select_StartStrategy == "CONWIP":
+    left_column3, right_column3 = st.beta_columns(2)
+    # You can use a column just like st.sidebar:
+    with left_column3:
+        chosenStarts =  st.slider(
+        'Select CONWIP level:',
+        0, 20)
+        #st.write(f"You choose {chosenStarts} Fixed Starts for each product")
 
 st.subheader('Initial Inventory:')
 st.write('Initial invntory currently fixed at 10 units for each product - Under development')
