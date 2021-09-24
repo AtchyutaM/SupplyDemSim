@@ -26,6 +26,11 @@ Select_StartStrategy = st.sidebar.selectbox(
     ( 'Fixed Starts','CONWIP')
 )
 
+if Select_StartStrategy == "CONWIP":
+    Select_SubStartStrategy = st.sidebar.selectbox(
+      'Select Sub level Start Strategy',
+        ( 'Releases equal to Demand','Set Manual start levels')
+    )
 
 Select_DemandStrategy = st.sidebar.selectbox(
   'Select Demand',
@@ -86,10 +91,21 @@ if Select_StartStrategy == "CONWIP":
     left_column3, right_column3 = st.beta_columns(2)
     # You can use a column just like st.sidebar:
     with left_column3:
-        chosenStarts =  st.slider(
+        CONWIPTotal =  st.slider(
         'Select CONWIP level:',
-        0, 20)
+        0, 100)
         #st.write(f"You choose {chosenStarts} Fixed Starts for each product")
+        chosenStarts = 0
+        
+    if Select_SubStartStrategy == "Set Manual start levels":
+        with left_column5:
+            MAxreleases =  st.slider(
+            'Select max releases for product 1:',
+            0, 20)
+            #st.write(f"You choose {chosenStarts} Fixed Starts for each product")
+            chosenStarts = 0
+
+
 
 st.subheader('Initial Inventory:')
 st.write('Initial inventory currently fixed at 10 units for each product - Under development')
@@ -200,14 +216,6 @@ p_sit_dem = 0
 p_move_dem = 1
 p_scarp_dem = 0
 
-#for now fixed
-
-# # Release and Inv for period 1
-IntialRel = [10,10]
-IntialInv = [10,10]
-IntialInv_Stage_Prod1 = [0,0,0]
-IntialInv_Stage2_prod2 = [0,0,0]  
-
 # New reeleases generation
 NewReleases_Prod1 = np.zeros(shape=(len(row_names),1), dtype=int) + chosenStarts 
 NewReleases_Prod2 = np.zeros(shape=(len(row_names),1), dtype=int) + chosenStarts
@@ -287,6 +295,10 @@ for i in range(len(row_names)):
         #move from last step to inv
         Prod1_Supply["Inv"][i] = Prod1_Supply.iloc[i-1,chosenprodstages]*p_move + Inv_Prod1['FGI'][i-1]
         Prod2_Supply["Inv"][i] = Prod2_Supply.iloc[i-1,chosenprodstages]*p_move + Inv_Prod2['FGI'][i-1]
+        #calculate releases:
+        if Select_StartStrategy == "CONWIP":  
+            NewReleases_Prod1[i] = 
+        
         for j in range(no_of_stages):
             k = no_of_stages - (j)
             # What ever sits from last period moves to next period 
@@ -360,6 +372,15 @@ for i in range(len(row_names)):
         if chosencusts > 1:
             Inv_Prod1['FGI'][i] =  Inv_Prod1["Inv"][i] -  Inv_Prod1['Fullfilled_c1'] [i] - Inv_Prod1['Fullfilled_c2'] [i]
             Inv_Prod2['FGI'][i] =  Inv_Prod2["Inv"][i] -  Inv_Prod2['Fullfilled_c1'] [i] - Inv_Prod2['Fullfilled_c2'] [i]
+
+
+
+
+
+
+
+
+
 print(Inv_Prod1)
 print(Inv_Prod2)
 print(FillStrat_prod1)
