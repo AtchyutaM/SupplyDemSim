@@ -71,7 +71,7 @@ chosenprods = int(chosenprods)
 st.header('Parameters for Selected Policies:')    
 
 st.subheader('Start Strategy:')
-st.write('Choosen Start Strategy:', 'is', Select_StartStrategy)
+st.write('Choosen Start Strategy:', Select_StartStrategy)
 
 if Select_StartStrategy == "Fixed Starts":
     left_column3, right_column3 = st.beta_columns(2)
@@ -92,10 +92,10 @@ if Select_StartStrategy == "CONWIP":
         #st.write(f"You choose {chosenStarts} Fixed Starts for each product")
 
 st.subheader('Initial Inventory:')
-st.write('Initial invntory currently fixed at 10 units for each product - Under development')
+st.write('Initial inventory currently fixed at 10 units for each product - Under development')
 
 st.subheader('Fill policy:')
-st.write('Choosen Fill policy', 'is:', Select_FillPolicy)
+st.write('Choosen Fill policy', Select_FillPolicy)
 
 st.subheader('Demand Generation policy:')
 st.write('Choosen Demand generation process', 'is:', Select_DemandStrategy)
