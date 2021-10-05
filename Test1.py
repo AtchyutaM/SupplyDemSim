@@ -87,6 +87,8 @@ if Select_StartStrategy == "Fixed Starts":
         0, 20)
         #st.write(f"You choose {chosenStarts} Fixed Starts for each product")
 
+Select_StartStrategy = "CONWIP"
+
 if Select_StartStrategy == "CONWIP":
     left_column3, right_column3 = st.beta_columns(2)
     # You can use a column just like st.sidebar:
@@ -97,13 +99,14 @@ if Select_StartStrategy == "CONWIP":
         #st.write(f"You choose {chosenStarts} Fixed Starts for each product")
         chosenStarts = 0
         
-    if Select_SubStartStrategy == "Set Manual start levels":
-        with left_column5:
-            MAxreleases =  st.slider(
-            'Select max releases for product 1:',
-            0, 20)
-            #st.write(f"You choose {chosenStarts} Fixed Starts for each product")
-            chosenStarts = 0
+# if Select_SubStartStrategy == "Set Manual start levels":
+#     left_column5, right_column5 = st.beta_columns(2)
+#     with left_column5:
+#         MAxreleases =  st.slider(
+#         'Select max releases for product 1:',
+#         0, 20)
+#         #st.write(f"You choose {chosenStarts} Fixed Starts for each product")
+#         chosenStarts = 0
 
 
 
@@ -124,13 +127,13 @@ with left_column4:
     0, 20)
     #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
 
-# For debug
-# chosenprodstages = 1
+# # For debug
+# chosenprodstages = 3
 # chosentime = 6
-# chosenStarts = 11
+# chosenStarts = 12
 # chosenDemand = 11
 # chosenprods = 1
-# chosencusts = 1
+# # chosencusts = 1
 
 
 
@@ -295,17 +298,23 @@ for i in range(len(row_names)):
         #move from last step to inv
         Prod1_Supply["Inv"][i] = Prod1_Supply.iloc[i-1,chosenprodstages]*p_move + Inv_Prod1['FGI'][i-1]
         Prod2_Supply["Inv"][i] = Prod2_Supply.iloc[i-1,chosenprodstages]*p_move + Inv_Prod2['FGI'][i-1]
-        #calculate releases:
-        if Select_StartStrategy == "CONWIP":  
-            NewReleases_Prod1[i] = 
-        
         for j in range(no_of_stages):
             k = no_of_stages - (j)
             # What ever sits from last period moves to next period 
             Prod1_Supply.iloc[i,k] = Prod1_Supply.iloc[i-1,k] * p_sit + Prod1_Supply.iloc[i-1][k-1]*p_move
             Prod2_Supply.iloc[i,k] = Prod2_Supply.iloc[i-1,k] * p_sit + Prod2_Supply.iloc[i-1][k-1]*p_move
-            Prod1_Supply.iloc[i,0] = NewReleases_Prod1[i]
-            Prod2_Supply.iloc[i,0] = NewReleases_Prod2[i]
+        #calculate releases:
+        if Select_StartStrategy == "CONWIP":  
+            TotalWIP = Prod1_Supply[WIP_names].sum(axis=1) + Prod2_Supply[WIP_names].sum(axis=1)
+            AvailforRelease = CONWIPTotal - TotalWIP[i]
+            if AvailforRelease >= chosencusts * chosenDemand:
+                NewReleases_Prod1[i] = chosenDemand
+                NewReleases_Prod2[i] = chosenDemand
+            else:
+                NewReleases_Prod1[i] = AvailforRelease/2
+                NewReleases_Prod2[i] = AvailforRelease/2
+        Prod1_Supply.iloc[i,0] = NewReleases_Prod1[i]
+        Prod2_Supply.iloc[i,0] = NewReleases_Prod2[i]
         WIP =  Prod1_Supply[WIP_names].sum(axis=1) + Prod2_Supply[WIP_names].sum(axis=1)
 
         # Step 2: update the warehouse with the factory output
