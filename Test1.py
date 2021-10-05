@@ -311,8 +311,8 @@ for i in range(len(row_names)):
                 NewReleases_Prod1[i] = chosenDemand
                 NewReleases_Prod2[i] = chosenDemand
             else:
-                NewReleases_Prod1[i] = AvailforRelease/2
-                NewReleases_Prod2[i] = AvailforRelease/2
+                NewReleases_Prod1[i] = AvailforRelease/chosencusts
+                NewReleases_Prod2[i] = AvailforRelease/chosencusts
         Prod1_Supply.iloc[i,0] = NewReleases_Prod1[i]
         Prod2_Supply.iloc[i,0] = NewReleases_Prod2[i]
         WIP =  Prod1_Supply[WIP_names].sum(axis=1) + Prod2_Supply[WIP_names].sum(axis=1)
