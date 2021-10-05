@@ -87,7 +87,7 @@ if Select_StartStrategy == "Fixed Starts":
         0, 20)
         #st.write(f"You choose {chosenStarts} Fixed Starts for each product")
 
-Select_StartStrategy = "CONWIP"
+#Select_StartStrategy = "CONWIP"
 
 if Select_StartStrategy == "CONWIP":
     left_column4, right_column4 = st.beta_columns(2)
