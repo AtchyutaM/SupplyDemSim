@@ -305,7 +305,9 @@ for i in range(len(row_names)):
             Prod2_Supply.iloc[i,k] = Prod2_Supply.iloc[i-1,k] * p_sit + Prod2_Supply.iloc[i-1][k-1]*p_move
         #calculate releases:
         if Select_StartStrategy == "CONWIP":  
-            TotalWIP = Prod1_Supply[WIP_names].sum(axis=1) + Prod2_Supply[WIP_names].sum(axis=1)
+            TotalWIP = Prod1_Supply[WIP_names].sum(axis=1)
+            if chosencusts > 1:
+                TotalWIP = Prod1_Supply[WIP_names].sum(axis=1) + Prod2_Supply[WIP_names].sum(axis=1)
             AvailforRelease = CONWIPTotal - TotalWIP[i]
             if AvailforRelease >= chosencusts * chosenDemand:
                 NewReleases_Prod1[i] = chosenDemand
