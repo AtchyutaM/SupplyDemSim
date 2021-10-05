@@ -90,9 +90,9 @@ if Select_StartStrategy == "Fixed Starts":
 Select_StartStrategy = "CONWIP"
 
 if Select_StartStrategy == "CONWIP":
-    left_column3, right_column3 = st.beta_columns(2)
+    left_column4, right_column4 = st.beta_columns(2)
     # You can use a column just like st.sidebar:
-    with left_column3:
+    with left_column4:
         CONWIPTotal =  st.slider(
         'Select CONWIP level:',
         0, 100)
