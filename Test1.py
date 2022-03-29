@@ -379,11 +379,11 @@ print(FillStrat_prod2)
 
 st.header("Supply Data")
 st.write('Product 1')
-st.table(Prod1_Supply.style.format("{:.2}"))
+st.table(Prod1_Supply.style.format("{:.2f}"))
 
 if chosenprods >1:
     st.write('Product 2')
-    st.table(Prod2_Supply.style.format("{:.2}"))
+    st.table(Prod2_Supply.style.format("{:.2f}"))
 
 
 st.header("Demand Data")
