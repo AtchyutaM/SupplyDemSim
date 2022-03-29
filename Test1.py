@@ -401,13 +401,13 @@ if chosenprods > 1 and chosencusts > 1:
 
 st.header("Inv Data")
 st.write('Prod 1 Inv Data')
-st.table(Inv_Prod1)
+#st.table(Inv_Prod1)
+st.line_chart(Inv_Prod1[['Inv','Demand_c1','Backorders_c1']])
 if chosenprods > 1:
     st.write('Prod 2 Inv Data')
-    st.table(Inv_Prod2)
+    st.line_chart(Inv_Prod2[['Inv','Demand_c2','Backorders_c2']])
+    #st.table(Inv_Prod2)
 
-
-st.line_chart(Inv_Prod1[['Inv','Demand_c1','Backorders_c1']])
 
 #st.write("Demand Data")
 #st.table('Customer 1 Demand product 1',dem_cust1_prod1)
