@@ -41,7 +41,7 @@ Select_DemandStrategy = st.sidebar.selectbox(
 #st.text('Please choose ')
 st.header('Select Paramters:') 
 
-left_column, right_column = st.beta_columns(2)
+left_column, right_column = st.columns(2)
 # You can use a column just like st.sidebar:
 with left_column:
     chosenprods = st.radio(
@@ -57,7 +57,7 @@ with right_column:
     st.write(f"You choose {chosencusts} customers")
 
 
-left_column2, right_column2 = st.beta_columns(2)
+left_column2, right_column2 = st.columns(2)
 with left_column2:
     chosentime =  st.slider(
     'Choose Number of Time Periods',
@@ -79,7 +79,7 @@ st.subheader('Start Strategy:')
 st.write('Choosen Start Strategy:', Select_StartStrategy)
 
 if Select_StartStrategy == "Fixed Starts":
-    left_column3, right_column3 = st.beta_columns(2)
+    left_column3, right_column3 = st.columns(2)
     # You can use a column just like st.sidebar:
     with left_column3:
         chosenStarts =  st.slider(
@@ -90,7 +90,7 @@ if Select_StartStrategy == "Fixed Starts":
 #Select_StartStrategy = "CONWIP"
 
 if Select_StartStrategy == "CONWIP":
-    left_column4, right_column4 = st.beta_columns(2)
+    left_column4, right_column4 = st.columns(2)
     # You can use a column just like st.sidebar:
     with left_column4:
         CONWIPTotal =  st.slider(
@@ -100,7 +100,7 @@ if Select_StartStrategy == "CONWIP":
         chosenStarts = 0
         
 # if Select_SubStartStrategy == "Set Manual start levels":
-#     left_column5, right_column5 = st.beta_columns(2)
+#     left_column5, right_column5 = st.columns(2)
 #     with left_column5:
 #         MAxreleases =  st.slider(
 #         'Select max releases for product 1:',
@@ -119,7 +119,7 @@ st.write('Choosen Fill policy', Select_FillPolicy)
 st.subheader('Demand Generation policy:')
 st.write('Choosen Demand generation process', 'is:', Select_DemandStrategy)
 
-left_column4, right_column4 = st.beta_columns(2)
+left_column4, right_column4 = st.columns(2)
 # You can use a column just like st.sidebar:
 with left_column4:
     chosenDemand =  st.slider(
