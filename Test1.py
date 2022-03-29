@@ -37,8 +37,8 @@ Select_DemandStrategy = st.sidebar.selectbox(
 )
 
 
-#st.text('Please choose ')
-st.header('Select Paramters:') 
+#Select Parameters
+st.header('Select Parameters:') 
 
 left_column, right_column = st.columns(2)
 # You can use a column just like st.sidebar:
@@ -48,7 +48,6 @@ with left_column:
         ("1", "2"))
     st.write(f"You choose {chosenprods} products")
 
-# Or even better, call Streamlit functions inside a "with" block:
 with right_column:
     chosencusts = st.radio(
         'Choose Number of Customers',
@@ -69,7 +68,7 @@ with right_column2:
         ("1", "2", "3"))
     st.write(f"You choose {chosenprodstages} Production Stages")
 
-## The program
+## The actual program:
 chosencusts = int(chosencusts)  
 chosenprods = int(chosenprods)  
 st.header('Parameters for Selected Policies:')    
@@ -376,7 +375,6 @@ print(Inv_Prod2)
 print(FillStrat_prod1)
 print(FillStrat_prod2)
 
-
 # display output:
 
 st.header("Supply Data")
@@ -407,6 +405,9 @@ st.table(Inv_Prod1)
 if chosenprods > 1:
     st.write('Prod 2 Inv Data')
     st.table(Inv_Prod2)
+
+
+st.line_chart(Inv_Prod1)
 
 #st.write("Demand Data")
 #st.table('Customer 1 Demand product 1',dem_cust1_prod1)
