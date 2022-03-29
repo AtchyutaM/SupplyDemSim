@@ -9,13 +9,12 @@ Created on Mon Jan  4 11:18:53 2021
 import pandas as pd
 import numpy as np
 import streamlit as st
-# Step 1 - no randomness - 1 product
 
 # Streamlit
 st.title('A Simple Supply Chain Dynamics Simulator')
 st.write('Version 1.0')
 
-#Add a selectbox to the sidebar:
+#Sidebar Selections:
 Select_FillPolicy = st.sidebar.selectbox(
   'Select Fill Policy',
     ('Proprtional Allocation', 'Customer 1 Bias')
@@ -26,11 +25,11 @@ Select_StartStrategy = st.sidebar.selectbox(
     ( 'Fixed Starts','CONWIP')
 )
 
-if Select_StartStrategy == "CONWIP":
-    Select_SubStartStrategy = st.sidebar.selectbox(
-      'Select Sub level Start Strategy',
-        ( 'Releases equal to Demand','Set Manual start levels')
-    )
+# if Select_StartStrategy == "CONWIP":
+#     Select_SubStartStrategy = st.sidebar.selectbox(
+#       'Select Sub level Start Strategy',
+#         ( 'Releases equal to Demand','Set Manual start levels')
+#     )
 
 Select_DemandStrategy = st.sidebar.selectbox(
   'Select Demand',
@@ -98,16 +97,6 @@ if Select_StartStrategy == "CONWIP":
         0, 100)
         #st.write(f"You choose {chosenStarts} Fixed Starts for each product")
         chosenStarts = 0
-        
-# if Select_SubStartStrategy == "Set Manual start levels":
-#     left_column5, right_column5 = st.columns(2)
-#     with left_column5:
-#         MAxreleases =  st.slider(
-#         'Select max releases for product 1:',
-#         0, 20)
-#         #st.write(f"You choose {chosenStarts} Fixed Starts for each product")
-#         chosenStarts = 0
-
 
 
 st.subheader('Initial Inventory:')
@@ -126,28 +115,6 @@ with left_column4:
     'Choose Number of Fixed Demands',
     0, 20)
     #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
-
-# # For debug
-# chosenprodstages = 3
-# chosentime = 6
-# chosenStarts = 12
-# chosenDemand = 11
-# chosenprods = 1
-# # chosencusts = 1
-
-
-
-# with st.form("my_form"):
-#     st.write("Inside the form")
-#     slider_val = st.slider("Form slider")
-#     checkbox_val = st.checkbox("Form checkbox")
-
-#     # Every form must have a submit button.
-#     submitted = st.form_submit_button("Submit")
-#     if submitted:
-#         st.write("slider", slider_val, "checkbox", checkbox_val)
-
-# st.write("Outside the form")
 
 
 # create supply datafrme
