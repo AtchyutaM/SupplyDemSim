@@ -408,6 +408,7 @@ if chosenprods > 1:
     st.line_chart(Inv_Prod2[['Inv','Demand_c2','Backorders_c2']])
     #st.table(Inv_Prod2)
 
+st.write('This is a test')
 
 #st.write("Demand Data")
 #st.table('Customer 1 Demand product 1',dem_cust1_prod1)
