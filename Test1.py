@@ -9,6 +9,8 @@ Created on Mon Jan  4 11:18:53 2021
 import pandas as pd
 import numpy as np
 import streamlit as st
+import altair as alt
+import matplotlib.pyplot as plt
 
 # Streamlit
 st.title('A Simple Supply Chain Dynamics Simulator')
@@ -59,7 +61,7 @@ left_column2, right_column2 = st.columns(2)
 with left_column2:
     chosentime =  st.slider(
     'Choose Number of Time Periods',
-    0, 10)
+    0, 100)
     st.write(f"You choose {chosentime} Time Periods")
 
 with right_column2:
@@ -100,6 +102,19 @@ if Select_StartStrategy == "CONWIP":
 
 st.subheader('Initial Inventory:')
 st.write('Initial inventory currently fixed at 10 units for each product - Under development')
+left_column5, right_column5 = st.columns(2)
+with left_column5:
+    IntialInv1 =  st.slider(
+    'Choose Intial Inv for Product 1',
+    0, 10)
+    st.write(f"You choose {IntialInv1} units as Inv of product 1")
+    IntialInv2 = 0
+if chosenprods>1:
+    with right_column5:
+        IntialInv2 =  st.slider(
+        'Choose Intial Inv for product 2',
+        0, 10)
+        st.write(f"You choose {IntialInv2} units as Inv for product 2")
 
 st.subheader('Fill policy:')
 st.write('Choosen Fill policy', Select_FillPolicy)
@@ -116,6 +131,17 @@ with left_column4:
     #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
 
 
+#For debug
+# chosenprodstages = 1
+# chosentime = 20
+# chosenStarts = 50
+# chosenDemand = 10
+# chosenprods = 2
+# chosencusts = 2
+# IntialInv1 = 0
+# IntialInv2 = 0
+
+
 # create supply datafrme
 
 WIP_names=["Stage 1","Stage 2","Stage 3","Stage 4"]
@@ -125,8 +151,9 @@ column_names = WIP_names.copy()
 column_names.insert(0,"Releases")
 column_names.extend(["Inv"])
 no_of_stages = chosenprodstages
-row_names = ["Period 0","Period 1", "Period 2", "Period 3", "Period 4","Period 5", "Period 6",
- "Period 7", "Period 8", "Period 9", "Period 10"]
+#row_names = ["Period 0","Period 1", "Period 2", "Period 3", "Period 4","Period 5", "Period 6",
+# "Period 7", "Period 8", "Period 9", "Period 10"]
+row_names = ['Period ' + str(x) for x in range(1,100)]
 row_names = row_names[0:chosentime+1]
 
 Products = ["Prod 1","Prod 2"]    
@@ -141,7 +168,7 @@ WIP = np.zeros(shape=(len(row_names),1), dtype=int)
 
 # Release and Inv for period 1
 IntialRel = [10,10]
-IntialInv = [10,10]
+IntialInv = [IntialInv1,IntialInv2]
 IntialInv_Stage_Prod1 = [0,0,0]
 IntialInv_Stage2_prod2 = [0,0,0]  
 
@@ -402,13 +429,68 @@ if chosenprods > 1 and chosencusts > 1:
 st.header("Inv Data")
 st.write('Prod 1 Inv Data')
 #st.table(Inv_Prod1)
-st.line_chart(Inv_Prod1[['Inv','Demand_c1','Backorders_c1']])
+#st.line_chart(Inv_Prod1[['Inv','Demand_c1','Backorders_c1']])
 if chosenprods > 1:
     st.write('Prod 2 Inv Data')
-    st.line_chart(Inv_Prod2[['Inv','Demand_c2','Backorders_c2']])
+    #st.line_chart(Inv_Prod2[['Inv','Demand_c2','Backorders_c2']])
     #st.table(Inv_Prod2)
+    
+#st.bar_chart(Inv_Prod1[['Inv','Demand_c1','Backorders_c1']])
 
-st.write('This is a test')
+Inv_Prod1['Periods'] = Inv_Prod1.index.copy()
+c = alt.Chart(Inv_Prod1).mark_bar().encode(
+    alt.X('Periods',sort=None),
+    alt.Y('Inv'),
+    column='Periods')
+
+
+#st.altair_chart(c, use_container_width=True)
+#st.plt.bar(x-0.2, y1, width)
+#st.plt.bar(x+0.2, y2, width)
+Inv_Prodplot = Inv_Prod1
+if chosenprods >1:
+    # Inv_Prod1.rename(columns = {'Inv':'InvProd1'}, inplace = True)
+    # Inv_Prod2.rename(columns = {'Inv':'InvProd2'}, inplace = True)
+    #frames = [Inv_Prod1,Inv_Prod2]
+    Inv_Prod1.columns = [str(col)+'_P1' for col in Inv_Prod1.columns]
+    Inv_Prod2.columns = [str(col)+'_P2' for col in Inv_Prod2.columns]
+    Inv_Prodplot = Inv_Prod1.join(Inv_Prod2)
+print('This is it')
+print(Inv_Prodplot)
+if chosencusts == 1 and chosenprods ==1:
+    Inv_Prodplot = Inv_Prodplot[['Inv','Demand_c1','Fullfilled_c1','Backorders_c1']]
+if chosencusts >1 and chosenprods ==1:
+    Inv_Prodplot = Inv_Prodplot[['Inv_P1','Demand_c1_p1','Demand_c1_P1', 'Fullfilled_c1_P1', 'Backorders_c1_P1',
+       'Demand_c2_P1', 'Fullfilled_c2_P1', 'Backorders_c2_P1']]
+if chosencusts >1 and chosenprods >1:
+    Inv_Prodplot = Inv_Prodplot[['Inv_P1', 'Demand_c1_P1', 'Fullfilled_c1_P1', 'Backorders_c1_P1',
+       'Demand_c2_P1', 'Fullfilled_c2_P1', 'Backorders_c2_P1', 'FGI_P1',
+       'Periods_P1', 'Inv_P2', 'Demand_c1_P2', 'Fullfilled_c1_P2',
+       'Backorders_c1_P2', 'Demand_c2_P2', 'Fullfilled_c2_P2',
+       'Backorders_c2_P2', 'FGI_P2']]
+    st.write('intelligent Plots')
+    if max(Inv_Prodplot[['Inv_P1','Inv_P2']].sum(axis=1)) > 3*chosenDemand:
+        st.write('Too much Inv: Reduce starts')
+        Plot_int1 = Inv_Prodplot[['Inv_P1', 'Demand_c1_P1', 'Fullfilled_c1_P1', 'Backorders_c1_P1',
+           'Demand_c2_P1', 'Fullfilled_c2_P1', 'FGI_P1',
+           'Periods_P1', 'Inv_P2', 'Demand_c1_P2', 'Fullfilled_c1_P2', 'Demand_c2_P2', 'Fullfilled_c2_P2', 'FGI_P2']]
+        Plot_int1['Periods'] = Inv_Prod1.index.copy()
+        #fig=plt.figure()
+        f = Plot_int1.plot(x='Periods', kind ='bar',stacked=False,width =1.5).figure
+        st.pyplot(f,use_container_width=True)
+    if max(Inv_Prodplot[['Backorders_c1_P1','Backorders_c1_P2','Backorders_c2_P2','Backorders_c2_P2']].sum(axis=1)) > 3*chosenStarts:
+        st.write('Too many Backorders, increase supply')
+        Plot_int1 = Inv_Prodplot[['Inv_P1', 'Demand_c1_P1', 'Fullfilled_c1_P1', 'Backorders_c1_P1',
+           'Demand_c2_P1', 'Fullfilled_c2_P1', 'FGI_P1',
+           'Periods_P1', 'Inv_P2', 'Demand_c1_P2', 'Fullfilled_c1_P2', 'Demand_c2_P2', 'Fullfilled_c2_P2', 'FGI_P2']]
+        Plot_int1['Periods'] = Inv_Prod1.index.copy()
+        #fig=plt.figure()
+        f = Plot_int1.plot(x='Periods', kind ='bar',stacked=False,width =1.5).figure
+        st.pyplot(f,use_container_width=True)
+Inv_Prodplot['Periods'] = Inv_Prod1.index.copy()
+#fig=plt.figure()
+f = Inv_Prodplot.plot(x='Periods', kind ='bar',stacked=False,width =1.5).figure
+st.pyplot(f,use_container_width=True)
 
 #st.write("Demand Data")
 #st.table('Customer 1 Demand product 1',dem_cust1_prod1)
@@ -420,6 +502,4 @@ st.write('This is a test')
 
 #Y = st.slider('Select Number of Customers')  # 👈 this is a widget
 #st.write('Number of Customers Selected', 'is', Y)
-
-
 
