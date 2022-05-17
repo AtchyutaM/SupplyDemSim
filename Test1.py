@@ -10,6 +10,7 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 import altair as alt
+import matplotlib as mp
 
 # Streamlit
 st.title('A Simple Supply Chain Dynamics Simulator')
