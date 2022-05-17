@@ -382,11 +382,6 @@ for i in range(len(row_names)):
 
 
 
-
-
-
-
-
 print(Inv_Prod1)
 print(Inv_Prod2)
 print(FillStrat_prod1)
