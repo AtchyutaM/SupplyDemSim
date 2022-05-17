@@ -449,7 +449,7 @@ if chosenprods >1:
     Inv_Prod1.columns = [str(col)+'_P1' for col in Inv_Prod1.columns]
     Inv_Prod2.columns = [str(col)+'_P2' for col in Inv_Prod2.columns]
     Inv_Prodplot = Inv_Prod1.join(Inv_Prod2)
-print('This is it')
+st.write('This is it')
 print(Inv_Prodplot)
 if chosencusts == 1 and chosenprods ==1:
     Inv_Prodplot = Inv_Prodplot[['Inv','Demand_c1','Fullfilled_c1','Backorders_c1']]
