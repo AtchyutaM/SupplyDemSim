@@ -422,11 +422,11 @@ if chosenprods > 1 and chosencusts > 1:
     st.table(dem_cust2_prod2.style.format("{:.2f}"))
 
 st.header("Inv Data")
-st.write('Prod 1 Inv Data')
+#st.write('Prod 1 Inv Data')
 #st.table(Inv_Prod1)
 #st.line_chart(Inv_Prod1[['Inv','Demand_c1','Backorders_c1']])
-if chosenprods > 1:
-    st.write('Prod 2 Inv Data')
+#if chosenprods > 1:
+    #st.write('Prod 2 Inv Data')
     #st.line_chart(Inv_Prod2[['Inv','Demand_c2','Backorders_c2']])
     #st.table(Inv_Prod2)
     
@@ -450,13 +450,21 @@ if chosenprods >1:
     Inv_Prod1.columns = [str(col)+'_P1' for col in Inv_Prod1.columns]
     Inv_Prod2.columns = [str(col)+'_P2' for col in Inv_Prod2.columns]
     Inv_Prodplot = Inv_Prod1.join(Inv_Prod2)
-st.write('This is it')
+#st.write('This is it')
 print(Inv_Prodplot)
 if chosencusts == 1 and chosenprods ==1:
     Inv_Prodplot = Inv_Prodplot[['Inv','Demand_c1','Fullfilled_c1','Backorders_c1']]
+    Inv_Prodplot['Periods'] = Inv_Prod1.index.copy()
+    #fig=plt.figure()
+    f = Inv_Prodplot.plot(x='Periods', kind ='bar',stacked=False,width =1.5).figure
+    st.pyplot(f,use_container_width=True)
 if chosencusts >1 and chosenprods ==1:
     Inv_Prodplot = Inv_Prodplot[['Inv_P1','Demand_c1_p1','Demand_c1_P1', 'Fullfilled_c1_P1', 'Backorders_c1_P1',
        'Demand_c2_P1', 'Fullfilled_c2_P1', 'Backorders_c2_P1']]
+    Inv_Prodplot['Periods'] = Inv_Prod1.index.copy()
+    #fig=plt.figure()
+    f = Inv_Prodplot.plot(x='Periods', kind ='bar',stacked=False,width =1.5).figure
+    st.pyplot(f,use_container_width=True)
 if chosencusts >1 and chosenprods >1:
     Inv_Prodplot = Inv_Prodplot[['Inv_P1', 'Demand_c1_P1', 'Fullfilled_c1_P1', 'Backorders_c1_P1',
        'Demand_c2_P1', 'Fullfilled_c2_P1', 'Backorders_c2_P1', 'FGI_P1',
@@ -464,28 +472,34 @@ if chosencusts >1 and chosenprods >1:
        'Backorders_c1_P2', 'Demand_c2_P2', 'Fullfilled_c2_P2',
        'Backorders_c2_P2', 'FGI_P2']]
     st.write('intelligent Plots')
-    if max(Inv_Prodplot[['Inv_P1','Inv_P2']].sum(axis=1)) > 3*chosenDemand:
-        st.write('Too much Inv: Reduce starts')
+    if max(Inv_Prodplot[['Inv_P1','Inv_P2']].sum(axis=1)) > 5*chosenDemand:
+        index_min = np.argmax((Inv_Prodplot[['Inv_P1','Inv_P2']].sum(axis=1)) > 5*chosenDemand)
+        st.write(f"Too much Inv strating in period {index_min}: Reduce starts")
         Plot_int1 = Inv_Prodplot[['Inv_P1', 'Demand_c1_P1', 'Fullfilled_c1_P1', 'Backorders_c1_P1',
-           'Demand_c2_P1', 'Fullfilled_c2_P1', 'FGI_P1',
-           'Periods_P1', 'Inv_P2', 'Demand_c1_P2', 'Fullfilled_c1_P2', 'Demand_c2_P2', 'Fullfilled_c2_P2', 'FGI_P2']]
+           'Demand_c2_P1', 'Fullfilled_c2_P1', 'Backorders_c2_P1',
+           'Periods_P1', 'Inv_P2', 'Demand_c1_P2', 'Fullfilled_c1_P2', 'Demand_c2_P2', 'Fullfilled_c2_P2']]
         Plot_int1['Periods'] = Inv_Prod1.index.copy()
         #fig=plt.figure()
         f = Plot_int1.plot(x='Periods', kind ='bar',stacked=False,width =1.5).figure
         st.pyplot(f,use_container_width=True)
-    if max(Inv_Prodplot[['Backorders_c1_P1','Backorders_c1_P2','Backorders_c2_P2','Backorders_c2_P2']].sum(axis=1)) > 3*chosenStarts:
-        st.write('Too many Backorders, increase supply')
+    elif max(Inv_Prodplot[['Backorders_c1_P1','Backorders_c1_P2','Backorders_c2_P2','Backorders_c2_P2']].sum(axis=1)) > 3*chosenStarts:
+        index_min = np.argmax((Inv_Prodplot[['Backorders_c1_P1','Backorders_c1_P2','Backorders_c2_P2','Backorders_c2_P2']].sum(axis=1)) > 3*chosenStarts)
+        st.write(f"Too many Backorders strating in period {index_min}: Increase supply")
         Plot_int1 = Inv_Prodplot[['Inv_P1', 'Demand_c1_P1', 'Fullfilled_c1_P1', 'Backorders_c1_P1',
-           'Demand_c2_P1', 'Fullfilled_c2_P1', 'FGI_P1',
-           'Periods_P1', 'Inv_P2', 'Demand_c1_P2', 'Fullfilled_c1_P2', 'Demand_c2_P2', 'Fullfilled_c2_P2', 'FGI_P2']]
+           'Demand_c2_P1', 'Fullfilled_c2_P1', 'Backorders_c2_P1',
+           'Periods_P1', 'Inv_P2', 'Demand_c1_P2', 'Fullfilled_c1_P2', 'Demand_c2_P2', 'Fullfilled_c2_P2']]
         Plot_int1['Periods'] = Inv_Prod1.index.copy()
         #fig=plt.figure()
         f = Plot_int1.plot(x='Periods', kind ='bar',stacked=False,width =1.5).figure
         st.pyplot(f,use_container_width=True)
-Inv_Prodplot['Periods'] = Inv_Prod1.index.copy()
-#fig=plt.figure()
-f = Inv_Prodplot.plot(x='Periods', kind ='bar',stacked=False,width =1.5).figure
-st.pyplot(f,use_container_width=True)
+    else:
+        Plot_int1 = Inv_Prodplot[['Inv_P1', 'Demand_c1_P1', 'Fullfilled_c1_P1', 'Backorders_c1_P1',
+           'Demand_c2_P1', 'Fullfilled_c2_P1',
+           'Periods_P1', 'Inv_P2', 'Demand_c1_P2', 'Fullfilled_c1_P2', 'Demand_c2_P2', 'Fullfilled_c2_P2']]
+        Plot_int1['Periods'] = Inv_Prod1.index.copy()
+        #fig=plt.figure()
+        f = Plot_int1.plot(x='Periods', kind ='bar',stacked=False,width =1.5).figure
+        st.pyplot(f,use_container_width=True)   
 
 #st.write("Demand Data")
 #st.table('Customer 1 Demand product 1',dem_cust1_prod1)
