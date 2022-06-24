@@ -46,8 +46,8 @@ with left_column:
     Mode = st.radio(
         'Choose which mode you want to run in',
         ("Simplified", "Granular"))
-    st.write(f"You choose {Mode} products")
-st.write('Granular mode offers greater control of releases, demand and Inventories across all time periods')
+    st.write(f"You choose {Mode} Mode")
+st.write('Note: Granular mode offers greater control of releases, demand and Inventories across all time periods')
 
 #Select Parameters
 st.header('Select Parameters:') 
