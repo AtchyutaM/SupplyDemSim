@@ -13,7 +13,7 @@ import altair as alt
 import matplotlib.pyplot as plt
 
 def selected(url):
-     st.markdown(f'<p style="background-color:#0066cc;color:#33ff33;font-size:12px;border-radius:2%;">{url}</p>', unsafe_allow_html=True)
+     st.markdown(f'<p style="color:#33ff33;font-size:12px;border-radius:2%;">{url}</p>', unsafe_allow_html=True)
 
 # Streamlit
 st.title('A Simple Supply Chain Dynamics Simulator')
