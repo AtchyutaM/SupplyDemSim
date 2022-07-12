@@ -98,6 +98,7 @@ if Select_StartStrategy == "Fixed Starts":
         ChosenStartsP1 =  st.slider(
         'Select Number of Starts in each period for Product 1',
         0, 20)
+        ChosenStartsP2 = 0
         #st.write(f"You choose {chosenStarts} Fixed Starts for each product")
     if chosenprods> 1:
         with right_column3:
@@ -146,6 +147,7 @@ with left_column4:
     ChosenDemandP1 =  st.slider(
     'Select Demand for Product 1',
     0, 20)
+    ChosenDemandP2 = 0
     #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
     if chosencusts> 1:
         with right_column4:
