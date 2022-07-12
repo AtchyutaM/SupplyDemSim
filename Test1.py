@@ -61,7 +61,7 @@ with left_column:
     chosenprods = st.radio(
         'Choose Number of Products',
         ("1", "2"))
-    selected(f"*You choose {chosenprods} products*")
+    selected(f"You choose {chosenprods} products")
 
 with right_column:
     chosencusts = st.radio(
@@ -95,10 +95,16 @@ if Select_StartStrategy == "Fixed Starts":
     left_column3, right_column3 = st.columns(2)
     # You can use a column just like st.sidebar:
     with left_column3:
-        chosenStarts =  st.slider(
-        'Select Number of Fixed Starts',
+        ChosenStartsP1 =  st.slider(
+        'Select Number of Fixed Starts for Product 1',
         0, 20)
         #st.write(f"You choose {chosenStarts} Fixed Starts for each product")
+    if chosenprods> 1:
+        with right_column3:
+            ChosenStartsP2 = st.slider(
+            'Select Number of Fixed Starts for Product 2',
+            0, 20)
+            selected(f"You choose {chosenprodstages} Production Stages")
 
 #Select_StartStrategy = "CONWIP"
 
