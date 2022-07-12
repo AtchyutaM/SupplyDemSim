@@ -143,17 +143,23 @@ st.write('Choosen Demand generation process', 'is:', Select_DemandStrategy)
 left_column4, right_column4 = st.columns(2)
 # You can use a column just like st.sidebar:
 with left_column4:
-    chosenDemand =  st.slider(
-    'Choose Number of Fixed Demands',
+    ChosenDemandP1 =  st.slider(
+    'Select Demand for Product 1',
     0, 20)
     #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
-
+    if chosencusts> 1:
+        with right_column4:
+            ChosenDemandP2 = st.slider(
+            'Select Demand for Product 2',
+            0, 20)
 
 #For debug
 # chosenprodstages = 1
 # chosentime = 20
-# chosenStarts = 50
-# chosenDemand = 10
+# ChosenStartsP1 = 10
+# ChosenStartsP2 = 10
+# ChosenDemandP1 = 10
+# ChosenDemandP2 = 10
 # chosenprods = 2
 # chosencusts = 2
 # IntialInv1 = 0
@@ -236,12 +242,12 @@ NewReleases_Prod2 = np.zeros(shape=(len(row_names),1), dtype=int) + ChosenStarts
 
 # New order generation
 # New orders coming in for each period
-NewOrders_Prod1_cust1 =  np.zeros(shape=(len(row_names),1), dtype=int) + chosenDemand 
-NewOrders_Prod2_cust1 =  np.zeros(shape=(len(row_names),1), dtype=int) + chosenDemand
+NewOrders_Prod1_cust1 =  np.zeros(shape=(len(row_names),1), dtype=int) + ChosenDemandP1 
+NewOrders_Prod2_cust1 =  np.zeros(shape=(len(row_names),1), dtype=int) + ChosenDemandP2
 
 if chosencusts > 1:
-    NewOrders_Prod1_cust2 =  np.zeros(shape=(len(row_names),1), dtype=int) + chosenDemand 
-    NewOrders_Prod2_cust2 =  np.zeros(shape=(len(row_names),1), dtype=int) + chosenDemand
+    NewOrders_Prod1_cust2 =  np.zeros(shape=(len(row_names),1), dtype=int) + ChosenDemandP1 
+    NewOrders_Prod2_cust2 =  np.zeros(shape=(len(row_names),1), dtype=int) + ChosenDemandP2
 
 
 column_names_inv = ["Inv","Demand_c1", "Fullfilled_c1", "Backorders_c1","FGI"]
@@ -490,8 +496,8 @@ if chosencusts >1 and chosenprods >1:
        'Backorders_c1_P2', 'Demand_c2_P2', 'Fullfilled_c2_P2',
        'Backorders_c2_P2', 'FGI_P2']]
     st.write('intelligent Plots')
-    if max(Inv_Prodplot[['Inv_P1','Inv_P2']].sum(axis=1)) > 5*chosenDemand:
-        index_min = np.argmax((Inv_Prodplot[['Inv_P1','Inv_P2']].sum(axis=1)) > 5*chosenDemand)
+    if max(Inv_Prodplot[['Inv_P1','Inv_P2']].sum(axis=1)) > 5*(ChosenDemandP1+ChosenDemandP2):
+        index_min = np.argmax((Inv_Prodplot[['Inv_P1','Inv_P2']].sum(axis=1)) > 5*(ChosenDemandP1+ChosenDemandP2))
         st.write(f"Too much Inv strating in period {index_min}: Reduce starts")
         Plot_int1 = Inv_Prodplot[['Inv_P1', 'Demand_c1_P1', 'Fullfilled_c1_P1', 'Backorders_c1_P1',
            'Demand_c2_P1', 'Fullfilled_c2_P1', 'Backorders_c2_P1',
@@ -500,8 +506,8 @@ if chosencusts >1 and chosenprods >1:
         #fig=plt.figure()
         f = Plot_int1.plot(x='Periods', kind ='bar',stacked=False,width =1.5).figure
         st.pyplot(f,use_container_width=True)
-    elif max(Inv_Prodplot[['Backorders_c1_P1','Backorders_c1_P2','Backorders_c2_P2','Backorders_c2_P2']].sum(axis=1)) > 3*chosenStarts:
-        index_min = np.argmax((Inv_Prodplot[['Backorders_c1_P1','Backorders_c1_P2','Backorders_c2_P2','Backorders_c2_P2']].sum(axis=1)) > 3*chosenStarts)
+    elif max(Inv_Prodplot[['Backorders_c1_P1','Backorders_c1_P2','Backorders_c2_P2','Backorders_c2_P2']].sum(axis=1)) > 3*(ChosenStartsP1+ChosenStartsP2):
+        index_min = np.argmax((Inv_Prodplot[['Backorders_c1_P1','Backorders_c1_P2','Backorders_c2_P2','Backorders_c2_P2']].sum(axis=1)) > 3*(ChosenStartsP1+ChosenStartsP2))
         st.write(f"Too many Backorders strating in period {index_min}: Increase supply")
         Plot_int1 = Inv_Prodplot[['Inv_P1', 'Demand_c1_P1', 'Fullfilled_c1_P1', 'Backorders_c1_P1',
            'Demand_c2_P1', 'Fullfilled_c2_P1', 'Backorders_c2_P1',
