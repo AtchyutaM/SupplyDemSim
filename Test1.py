@@ -92,8 +92,7 @@ chosenprods = int(chosenprods)
 st.header('Parameters for Selected Policies:')    
 
 st.subheader('Start Strategy:')
-st.write('Choosen Start Strategy:') 
-selected2(Select_StartStrategy)
+selected2('Choosen Start Strategy:',Select_StartStrategy)
 
 if Select_StartStrategy == "Fixed Starts":
     left_column3, right_column3 = st.columns(2)
