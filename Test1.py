@@ -15,6 +15,9 @@ import matplotlib.pyplot as plt
 def selected(url):
      st.markdown(f'<p style="color:#33ff33;font-size:12px;border-radius:2%;">{url}</p>', unsafe_allow_html=True)
 
+def selected2(url):
+     st.markdown(f'<p style="color:#33ff33;font-size:16px;border-radius:2%;">{url}</p>', unsafe_allow_html=True)
+
 # Streamlit
 st.title('A Simple Supply Chain Dynamics Simulator')
 st.write('Version 1.1')
@@ -42,15 +45,15 @@ Select_DemandStrategy = st.sidebar.selectbox(
 )
 
 # Granular Mode
-st.header('Select Mode:')
-left_column, right_column = st.columns(2)
-# You can use a column just like st.sidebar:
-with left_column:
-    Mode = st.radio(
-        'Choose which mode you want to run in',
-        ("Simplified", "Granular"))
-    st.write(f"You choose {Mode} Mode")
-st.write('Note: Granular mode offers greater control of releases, demand and Inventories across all time periods')
+# st.header('Select Mode:')
+# left_column, right_column = st.columns(2)
+# # You can use a column just like st.sidebar:
+# with left_column:
+#     Mode = st.radio(
+#         'Choose which mode you want to run in',
+#         ("Simplified", "Granular"))
+#     st.write(f"You choose {Mode} Mode")
+# st.write('Note: Granular mode offers greater control of releases, demand and Inventories across all time periods')
 
 #Select Parameters
 st.header('Select Parameters:') 
@@ -89,7 +92,8 @@ chosenprods = int(chosenprods)
 st.header('Parameters for Selected Policies:')    
 
 st.subheader('Start Strategy:')
-st.write('Choosen Start Strategy:', Select_StartStrategy)
+st.write('Choosen Start Strategy:') 
+selected2(Select_StartStrategy)
 
 if Select_StartStrategy == "Fixed Starts":
     left_column3, right_column3 = st.columns(2)
@@ -97,14 +101,14 @@ if Select_StartStrategy == "Fixed Starts":
     with left_column3:
         ChosenStartsP1 =  st.slider(
         'Select Number of Starts in each period for Product 1',
-        0, 20)
+        0, 100)
         ChosenStartsP2 = 0
         #st.write(f"You choose {chosenStarts} Fixed Starts for each product")
     if chosenprods> 1:
         with right_column3:
             ChosenStartsP2 = st.slider(
             'Select Number of Starts in each period for Product 2',
-            0, 20)
+            0, 100)
 
 #Select_StartStrategy = "CONWIP"
 
@@ -146,14 +150,14 @@ left_column4, right_column4 = st.columns(2)
 with left_column4:
     ChosenDemandP1 =  st.slider(
     'Select Demand for Product 1',
-    0, 20)
+    0, 100)
     ChosenDemandP2 = 0
     #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
     if chosencusts> 1:
         with right_column4:
             ChosenDemandP2 = st.slider(
             'Select Demand for Product 2',
-            0, 20)
+            0, 100)
 
 #For debug
 # chosenprodstages = 1
