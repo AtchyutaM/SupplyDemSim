@@ -96,15 +96,14 @@ if Select_StartStrategy == "Fixed Starts":
     # You can use a column just like st.sidebar:
     with left_column3:
         ChosenStartsP1 =  st.slider(
-        'Select Number of Fixed Starts for Product 1',
+        'Select Number of Starts in each period for Product 1',
         0, 20)
         #st.write(f"You choose {chosenStarts} Fixed Starts for each product")
     if chosenprods> 1:
         with right_column3:
             ChosenStartsP2 = st.slider(
-            'Select Number of Fixed Starts for Product 2',
+            'Select Number of Starts in each period for Product 2',
             0, 20)
-            selected(f"You choose {chosenprodstages} Production Stages")
 
 #Select_StartStrategy = "CONWIP"
 
@@ -232,8 +231,8 @@ p_move_dem = 1
 p_scarp_dem = 0
 
 # New reeleases generation
-NewReleases_Prod1 = np.zeros(shape=(len(row_names),1), dtype=int) + chosenStarts 
-NewReleases_Prod2 = np.zeros(shape=(len(row_names),1), dtype=int) + chosenStarts
+NewReleases_Prod1 = np.zeros(shape=(len(row_names),1), dtype=int) + ChosenStartsP1 
+NewReleases_Prod2 = np.zeros(shape=(len(row_names),1), dtype=int) + ChosenStartsP2
 
 # New order generation
 # New orders coming in for each period
