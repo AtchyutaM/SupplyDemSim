@@ -13,7 +13,7 @@ import altair as alt
 import matplotlib.pyplot as plt
 
 def selected(url):
-     st.markdown(f'<p style="background-color:#0066cc;color:#33ff33;font-size:24px;border-radius:2%;">{url}</p>', unsafe_allow_html=True)
+     st.markdown(f'<p style="background-color:#0066cc;color:#33ff33;font-size:12px;border-radius:2%;">{url}</p>', unsafe_allow_html=True)
 
 # Streamlit
 st.title('A Simple Supply Chain Dynamics Simulator')
@@ -50,7 +50,7 @@ with left_column:
         'Choose which mode you want to run in',
         ("Simplified", "Granular"))
     st.write(f"You choose {Mode} Mode")
-selected('Note: Granular mode offers greater control of releases, demand and Inventories across all time periods')
+st.write('Note: Granular mode offers greater control of releases, demand and Inventories across all time periods')
 
 #Select Parameters
 st.header('Select Parameters:') 
@@ -61,13 +61,13 @@ with left_column:
     chosenprods = st.radio(
         'Choose Number of Products',
         ("1", "2"))
-    st.write(f"*You choose {chosenprods} products*")
+    selected(f"*You choose {chosenprods} products*")
 
 with right_column:
     chosencusts = st.radio(
         'Choose Number of Customers',
         ("1", "2"))
-    st.write(f"You choose {chosencusts} customers")
+    selected(f"You choose {chosencusts} customers")
 
 
 left_column2, right_column2 = st.columns(2)
@@ -75,13 +75,13 @@ with left_column2:
     chosentime =  st.slider(
     'Choose Number of Time Periods',
     0, 100)
-    st.write(f"You choose {chosentime} Time Periods")
+    selected(f"You choose {chosentime} Time Periods")
 
 with right_column2:
     chosenprodstages = st.radio(
         'Choose Number of Production Stages',
         ("1", "2", "3"))
-    st.write(f"You choose {chosenprodstages} Production Stages")
+    selected(f"You choose {chosenprodstages} Production Stages")
 
 ## The actual program:
 chosencusts = int(chosencusts)  
