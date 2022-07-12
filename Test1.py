@@ -58,7 +58,7 @@ with left_column:
     chosenprods = st.radio(
         'Choose Number of Products',
         ("1", "2"))
-    st.write(f"You choose {chosenprods} products")
+    st.write(f"*You choose {chosenprods} products*")
 
 with right_column:
     chosencusts = st.radio(
