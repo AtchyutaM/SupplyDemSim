@@ -12,6 +12,9 @@ import streamlit as st
 import altair as alt
 import matplotlib.pyplot as plt
 
+def selected(url):
+     st.markdown(f'<p style="background-color:#0066cc;color:#33ff33;font-size:24px;border-radius:2%;">{url}</p>', unsafe_allow_html=True)
+
 # Streamlit
 st.title('A Simple Supply Chain Dynamics Simulator')
 st.write('Version 1.1')
@@ -47,7 +50,7 @@ with left_column:
         'Choose which mode you want to run in',
         ("Simplified", "Granular"))
     st.write(f"You choose {Mode} Mode")
-st.write('Note: Granular mode offers greater control of releases, demand and Inventories across all time periods')
+selected('Note: Granular mode offers greater control of releases, demand and Inventories across all time periods')
 
 #Select Parameters
 st.header('Select Parameters:') 
