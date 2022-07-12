@@ -16,7 +16,7 @@ def selected(url):
      st.markdown(f'<p style="color:#33ff33;font-size:12px;border-radius:2%;">{url}</p>', unsafe_allow_html=True)
 
 def selected2(url):
-     st.markdown(f'<p style="color:#33ff33;font-size:16px;border-radius:2%;">{url}</p>', unsafe_allow_html=True)
+     st.markdown(f'<p style="color:#33ff33;font-size:14px;border-radius:2%;">{url}</p>', unsafe_allow_html=True)
 
 # Streamlit
 st.title('A Simple Supply Chain Dynamics Simulator')
@@ -92,7 +92,7 @@ chosenprods = int(chosenprods)
 st.header('Parameters for Selected Policies:')    
 
 st.subheader('Start Strategy:')
-selected2(f"Choosen Start Strategy:{Select_StartStrategy}")
+selected2(f"Choosen Start Strategy: {Select_StartStrategy}")
 
 if Select_StartStrategy == "Fixed Starts":
     left_column3, right_column3 = st.columns(2)
@@ -123,7 +123,6 @@ if Select_StartStrategy == "CONWIP":
 
 
 st.subheader('Initial Inventory:')
-st.write('Initial inventory currently fixed at 10 units for each product - Under development')
 left_column5, right_column5 = st.columns(2)
 with left_column5:
     IntialInv1 =  st.slider(
@@ -142,10 +141,9 @@ st.subheader('Fill policy:')
 st.write('Choosen Fill policy', Select_FillPolicy)
 
 st.subheader('Demand Generation policy:')
-st.write('Choosen Demand generation process', 'is:', Select_DemandStrategy)
+selected2(f"Choosen Demand generation process is: {Select_DemandStrategy}")
 
 left_column4, right_column4 = st.columns(2)
-# You can use a column just like st.sidebar:
 with left_column4:
     ChosenDemandP1 =  st.slider(
     'Select Demand for Product 1',
