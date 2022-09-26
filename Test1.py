@@ -152,6 +152,10 @@ if Select_DemandStrategy == "Fixed Demand":
         ChosenDemandP2 = 0
         ChosenDemandStDevP1 = 0
         ChosenDemandStDevP2 = 0
+        ChosenDemandStDevP1 = 0
+        ChosenDemandStDevP2 = 0
+        ChosenDemandCVP1 = 0
+        ChosenDemandCVP2 = 0
         #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
         if chosencusts> 1:
             with right_column6:
@@ -168,6 +172,8 @@ if Select_DemandStrategy == 'Normal Distibution':
         ChosenDemandP2 = 0
         ChosenDemandStDevP1 = 0
         ChosenDemandStDevP2 = 0
+        ChosenDemandCVP1 = 0
+        ChosenDemandCVP2 = 0
         #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
         if chosencusts> 1:
             with right_column6:
