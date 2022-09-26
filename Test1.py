@@ -143,18 +143,46 @@ st.write('Choosen Fill policy', Select_FillPolicy)
 st.subheader('Demand Generation policy:')
 selected2(f"Choosen Demand generation process is: {Select_DemandStrategy}")
 
-left_column4, right_column4 = st.columns(2)
-with left_column4:
-    ChosenDemandP1 =  st.slider(
-    'Select Demand for Product 1',
-    0, 100)
-    ChosenDemandP2 = 0
-    #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
-    if chosencusts> 1:
-        with right_column4:
-            ChosenDemandP2 = st.slider(
-            'Select Demand for Product 2',
-            0, 100)
+if Select_DemandStrategy == "Fixed Demand":
+    left_column4, right_column4 = st.columns(2)
+    with left_column4:
+        ChosenDemandP1 =  st.slider(
+        'Select Demand for Product 1',
+        0, 100)
+        ChosenDemandP2 = 0
+        #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
+        if chosencusts> 1:
+            with right_column4:
+                ChosenDemandP2 = st.slider(
+                'Select Demand for Product 2',
+                0, 100)
+                
+if Select_DemandStrategy == "Normal Distribution":
+    left_column4, right_column4 = st.columns(2)
+    with left_column4:
+        ChosenDemandMeanP1 =  st.slider(
+        'Select Mean Demand for Product 1',
+        0, 100)
+        ChosenDemandMeanP2 = 0
+        #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
+        if chosencusts> 1:
+            with right_column4:
+                ChosenDemandMeanP2 = st.slider(
+                'Select Mean Demand for Product 2',
+                0, 100) 
+    left_column5, right_column5 = st.columns(2)
+    with left_column5:
+        ChosenDemandStDevP1 =  st.slider(
+        'Select Standard Deviation for Product 1',
+        0, 2)
+        ChosenDemandStDevP2  = 0
+        #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
+        if chosencusts> 1:
+            with right_column5:
+                ChosenDemandStDevP2 = st.slider(
+                'Select Standard Deviation for Product 2',
+                0, 2)   
+
 
 #For debug
 # chosenprodstages = 1
@@ -329,10 +357,10 @@ for i in range(len(row_names)):
             if chosencusts > 1:
                 TotalWIP = Prod1_Supply[WIP_names].sum(axis=1) + Prod2_Supply[WIP_names].sum(axis=1)
             AvailforRelease = CONWIPTotal - TotalWIP[i]
-            if AvailforRelease >= chosencusts * chosenDemand:
-                NewReleases_Prod1[i] = chosenDemand
+            if AvailforRelease >= ChosenDemandP1 + ChosenDemandP2:
+                NewReleases_Prod1[i] = ChosenDemandP1
                 if chosencusts > 1:
-                    NewReleases_Prod2[i] = chosenDemand
+                    NewReleases_Prod2[i] = ChosenDemandP2
             else:
                 NewReleases_Prod1[i] = AvailforRelease/chosencusts
                 if chosencusts > 1:
