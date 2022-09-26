@@ -205,7 +205,8 @@ if Select_DemandStrategy == 'Normal Distibution':
 # IntialInv1 = 0
 # IntialInv2 = 0
 
-
+ChosenDemandStDevP1 = ChosenDemandCVP1 * ChosenDemandP1
+ChosenDemandStDevP2 = ChosenDemandCVP2 * ChosenDemandP2
 # create supply datafrme
 
 WIP_names=["Stage 1","Stage 2","Stage 3","Stage 4"]
