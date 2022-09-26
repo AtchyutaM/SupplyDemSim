@@ -180,7 +180,7 @@ if Select_DemandStrategy == 'Normal Distibution':
         'Select Coefficent of Variation (CV) for Demand of Product 1',
         0, 2)
         ChosenDemandStDevP1 = ChosenDemandCVP1 * ChosenDemandP1
-        st.write(f"St Dev of Demand for Product 1 {ChosenDemandStDevP1}")
+        st.write(f"St Dev of Demand for Product 1: {ChosenDemandStDevP1}")
         ChosenDemandCVP2  = 0
         #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
         if chosencusts> 1:
@@ -189,21 +189,21 @@ if Select_DemandStrategy == 'Normal Distibution':
                 'Select Coefficent of Variation (CV) for Demand of Product 2',
                 0, 2)
                 ChosenDemandStDevP2 = ChosenDemandCVP2 * ChosenDemandP2
-                st.write(f"St Dev of Demand for Product 2 {ChosenDemandStDevP2}")
+                st.write(f"St Dev of Demand for Product 2: {ChosenDemandStDevP2}")
         
 #For debug
-chosenprodstages = 1
-chosentime = 20
-ChosenStartsP1 = 10
-ChosenStartsP2 = 10
-ChosenDemandP1 = 10
-ChosenDemandP2 = 10
-ChosenDemandStDevP2 = 8
-ChosenDemandStDevP1 = 8
-chosenprods = 2
-chosencusts = 2
-IntialInv1 = 0
-IntialInv2 = 0
+# chosenprodstages = 1
+# chosentime = 20
+# ChosenStartsP1 = 10
+# ChosenStartsP2 = 10
+# ChosenDemandP1 = 10
+# ChosenDemandP2 = 10
+# ChosenDemandStDevP2 = 8
+# ChosenDemandStDevP1 = 8
+# chosenprods = 2
+# chosencusts = 2
+# IntialInv1 = 0
+# IntialInv2 = 0
 
 
 # create supply datafrme
