@@ -144,8 +144,8 @@ st.subheader('Demand Generation policy:')
 selected2(f"Choosen Demand generation process is: {Select_DemandStrategy}")
 
 if Select_DemandStrategy == "Fixed Demand":
-    left_column4, right_column4 = st.columns(2)
-    with left_column4:
+    left_column6, right_column6 = st.columns(2)
+    with left_column6:
         ChosenDemandP1 =  st.slider(
         'Select Demand for Product 1',
         0, 100)
@@ -154,26 +154,26 @@ if Select_DemandStrategy == "Fixed Demand":
         ChosenDemandStDevP2 = 0
         #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
         if chosencusts> 1:
-            with right_column4:
+            with right_column6:
                 ChosenDemandP2 = st.slider(
                 'Select Demand for Product 2',
                 0, 100)
                 
 if Select_DemandStrategy == "Normal Distribution":
-    left_column4, right_column4 = st.columns(2)
-    with left_column4:
+    left_column6, right_column6 = st.columns(2)
+    with left_column6:
         ChosenDemandP1 =  st.slider(
         'Select Mean Demand for Product 1',
         0, 100)
         ChosenDemandMeanP2 = 0
         #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
         if chosencusts> 1:
-            with right_column4:
+            with right_column6:
                 ChosenDemandP2 = st.slider(
                 'Select Mean Demand for Product 2',
                 0, 100) 
-    left_column5, right_column5 = st.columns(2)
-    with left_column5:
+    left_column7, right_column7 = st.columns(2)
+    with left_column7:
         ChosenDemandCVP1 =  st.slider(
         'Select Coefficent of Variation (CV) for Demand of Product 1',
         0, 2)
@@ -181,7 +181,7 @@ if Select_DemandStrategy == "Normal Distribution":
         ChosenDemandCVP2  = 0
         #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
         if chosencusts> 1:
-            with right_column5:
+            with right_column7:
                 ChosenDemandCVP2 = st.slider(
                 'Select Coefficent of Variation (CV) for Demand of Product 2',
                 0, 2)
