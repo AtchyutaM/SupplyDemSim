@@ -284,12 +284,12 @@ NewReleases_Prod2 = np.zeros(shape=(len(row_names),1), dtype=int) + ChosenStarts
 # New orders coming in for each period
 
 np.random.seed(30)
-NewOrders_Prod1_cust1 =  np.random.normal(size=(len(row_names),1)) * ChosenDemandStDevP1 + ChosenDemandP1 
-NewOrders_Prod2_cust1 =  np.random.normal(size=(len(row_names),1)) * ChosenDemandStDevP2 + ChosenDemandP2
+NewOrders_Prod1_cust1 =  (np.random.normal(size=(len(row_names),1)) * ChosenDemandStDevP1) + ChosenDemandP1 
+NewOrders_Prod2_cust1 =  (np.random.normal(size=(len(row_names),1)) * ChosenDemandStDevP2) + ChosenDemandP2
 
 if chosencusts > 1:
-    NewOrders_Prod1_cust2 =  np.random.normal(size=(len(row_names),1)) * ChosenDemandStDevP1 + ChosenDemandP1 
-    NewOrders_Prod2_cust2 =  np.random.normal(size=(len(row_names),1)) * ChosenDemandStDevP2  + ChosenDemandP2
+    NewOrders_Prod1_cust2 =  (np.random.normal(size=(len(row_names),1)) * ChosenDemandStDevP1) + ChosenDemandP1 
+    NewOrders_Prod2_cust2 =  (np.random.normal(size=(len(row_names),1)) * ChosenDemandStDevP2)  + ChosenDemandP2
 
 
 column_names_inv = ["Inv","Demand_c1", "Fullfilled_c1", "Backorders_c1","FGI"]
