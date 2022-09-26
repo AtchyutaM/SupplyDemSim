@@ -180,6 +180,7 @@ if Select_DemandStrategy == 'Normal Distibution':
         'Select Coefficent of Variation (CV) for Demand of Product 1',
         0, 2)
         ChosenDemandStDevP1 = ChosenDemandCVP1 * ChosenDemandP1
+        st.write(f"St Dev of Demand for Product 1 {ChosenDemandStDevP1}")
         ChosenDemandCVP2  = 0
         #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
         if chosencusts> 1:
