@@ -150,6 +150,8 @@ if Select_DemandStrategy == "Fixed Demand":
         'Select Demand for Product 1',
         0, 100)
         ChosenDemandP2 = 0
+        ChosenDemandStDevP1 = 0
+        ChosenDemandStDevP2 = 0
         #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
         if chosencusts> 1:
             with right_column4:
@@ -160,30 +162,32 @@ if Select_DemandStrategy == "Fixed Demand":
 if Select_DemandStrategy == "Normal Distribution":
     left_column4, right_column4 = st.columns(2)
     with left_column4:
-        ChosenDemandMeanP1 =  st.slider(
+        ChosenDemandP1 =  st.slider(
         'Select Mean Demand for Product 1',
         0, 100)
         ChosenDemandMeanP2 = 0
         #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
         if chosencusts> 1:
             with right_column4:
-                ChosenDemandMeanP2 = st.slider(
+                ChosenDemandP2 = st.slider(
                 'Select Mean Demand for Product 2',
                 0, 100) 
     left_column5, right_column5 = st.columns(2)
     with left_column5:
-        ChosenDemandStDevP1 =  st.slider(
-        'Select Standard Deviation for Product 1',
+        ChosenDemandCVP1 =  st.slider(
+        'Select Coefficent of Variation (CV) for Demand of Product 1',
         0, 2)
-        ChosenDemandStDevP2  = 0
+        ChosenDemandStDevP1 = ChosenDemandCVP1 * ChosenDemandP1
+        ChosenDemandCVP2  = 0
         #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
         if chosencusts> 1:
             with right_column5:
-                ChosenDemandStDevP2 = st.slider(
-                'Select Standard Deviation for Product 2',
-                0, 2)   
-
-
+                ChosenDemandCVP2 = st.slider(
+                'Select Coefficent of Variation (CV) for Demand of Product 2',
+                0, 2)
+                ChosenDemandStDevP2 = ChosenDemandCVP2 * ChosenDemandP2
+                st.write(f"St Dev of Demand for Product 2 {ChosenDemandStDevP2}")
+        
 #For debug
 # chosenprodstages = 1
 # chosentime = 20
@@ -273,12 +277,14 @@ NewReleases_Prod2 = np.zeros(shape=(len(row_names),1), dtype=int) + ChosenStarts
 
 # New order generation
 # New orders coming in for each period
-NewOrders_Prod1_cust1 =  np.zeros(shape=(len(row_names),1), dtype=int) + ChosenDemandP1 
-NewOrders_Prod2_cust1 =  np.zeros(shape=(len(row_names),1), dtype=int) + ChosenDemandP2
+
+np.random.seed(30)
+NewOrders_Prod1_cust1 =  np.random.normal(size=(len(row_names),1)) * ChosenDemandStDevP1 + ChosenDemandP1 
+NewOrders_Prod2_cust1 =  np.random.normal(size=(len(row_names),1)) * ChosenDemandStDevP2 + ChosenDemandP2
 
 if chosencusts > 1:
-    NewOrders_Prod1_cust2 =  np.zeros(shape=(len(row_names),1), dtype=int) + ChosenDemandP1 
-    NewOrders_Prod2_cust2 =  np.zeros(shape=(len(row_names),1), dtype=int) + ChosenDemandP2
+    NewOrders_Prod1_cust2 =  np.random.normal(size=(len(row_names),1)) * ChosenDemandStDevP1 + ChosenDemandP1 
+    NewOrders_Prod2_cust2 =  np.random.normal(size=(len(row_names),1)) * ChosenDemandStDevP2  + ChosenDemandP2
 
 
 column_names_inv = ["Inv","Demand_c1", "Fullfilled_c1", "Backorders_c1","FGI"]
