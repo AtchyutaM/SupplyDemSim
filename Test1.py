@@ -159,7 +159,7 @@ if Select_DemandStrategy == "Fixed Demand":
                 'Select Demand for Product 2',
                 0, 100)
                 
-if Select_DemandStrategy == "Fixed Demand":
+if Select_DemandStrategy == 'Normal Distibution':
     left_column6, right_column6 = st.columns(2)
     with left_column6:
         ChosenDemandP1 =  st.slider(
