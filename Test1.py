@@ -203,11 +203,11 @@ if Select_DemandStrategy == 'Normal Distibution':
 # ChosenStartsP1 = 10
 # ChosenStartsP2 = 10
 # ChosenDemandP1 = 10
-# ChosenDemandP2 = 10
-# ChosenDemandStDevP2 = 8
-# ChosenDemandStDevP1 = 8
-# chosenprods = 2
-# chosencusts = 2
+# ChosenDemandP2 = 0
+# ChosenDemandStDevP2 = 0
+# ChosenDemandStDevP1 = 0
+# chosenprods = 1
+# chosencusts = 1
 # IntialInv1 = 0
 # IntialInv2 = 0
 
@@ -254,12 +254,12 @@ zero_data_dem = np.zeros(shape=(len(row_names),len(column_names_dem)))
 
 
 dem_cust1_prod1 = pd.DataFrame(zero_data_dem,row_names, column_names_dem)
-dem_cust1_prod2 = pd.DataFrame(zero_data_dem,row_names, column_names_dem)
+dem_cust1_prod2 = dem_cust1_prod1.copy()
 #print(dem_cust1_prod2)
 
 if chosencusts > 1:
-    dem_cust2_prod1 = pd.DataFrame(zero_data_dem,row_names, column_names_dem)
-    dem_cust2_prod2 = pd.DataFrame(zero_data_dem,row_names, column_names_dem)
+    dem_cust2_prod1 = dem_cust1_prod1.copy()
+    dem_cust2_prod2 = dem_cust1_prod1.copy()
 
 
 # Create Fill Strategy dataframe
