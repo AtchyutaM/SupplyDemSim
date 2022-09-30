@@ -512,26 +512,27 @@ print(FillStrat_prod2)
 # display output:
 
 st.header("Supply Data")
-st.write('Product 1')
-st.table(Prod1_Supply.style.format("{:.2f}"))
-
-if chosenprods >1:
-    st.write('Product 2')
-    st.table(Prod2_Supply.style.format("{:.2f}"))
+if chosentime <200 :
+    st.write('Product 1')
+    st.table(Prod1_Supply.style.format("{:.2f}"))
+    if chosenprods >1:
+        st.write('Product 2')
+        st.table(Prod2_Supply.style.format("{:.2f}"))
 
 
 st.header("Demand Data")
-st.write('Customer 1 Demand product 1')
-st.table(dem_cust1_prod1.style.format("{:.2f}"))
-if chosenprods > 1:
-    st.write('Customer 1 Demand product 2')
-    st.table(dem_cust2_prod2.style.format("{:.2f}"))
-if chosencusts >1:
-    st.write('Customer 2 Demand product 1')
-    st.table(dem_cust2_prod1.style.format("{:.2f}"))
-if chosenprods > 1 and chosencusts > 1:
-    st.write('Customer 2 Demand product 2')
-    st.table(dem_cust2_prod2.style.format("{:.2f}"))
+if chosentime <200 :
+    st.write('Customer 1 Demand product 1')
+    st.table(dem_cust1_prod1.style.format("{:.2f}"))
+    if chosenprods > 1:
+        st.write('Customer 1 Demand product 2')
+        st.table(dem_cust2_prod2.style.format("{:.2f}"))
+    if chosencusts >1:
+        st.write('Customer 2 Demand product 1')
+        st.table(dem_cust2_prod1.style.format("{:.2f}"))
+    if chosenprods > 1 and chosencusts > 1:
+        st.write('Customer 2 Demand product 2')
+        st.table(dem_cust2_prod2.style.format("{:.2f}"))
 
 st.header("Inv Data")
 #st.write('Prod 1 Inv Data')
