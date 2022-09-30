@@ -572,8 +572,8 @@ if chosencusts == 1 and chosenprods ==1:
     st.pyplot(f,use_container_width=True)
     
     Costplot = Costs_Prod1[['FGICosts','BOCosts']]
-    Costplot['Periods'] = Inv_Prod1.index.copy()
-    cost = Inv_Prodplot.plot(x='Periods', kind ='bar',stacked=True ,width =1).figure
+    Costplot['Periods'] = Costs_Prod1.index.copy()
+    cost = Costplot.plot(x='Periods', kind ='bar',stacked=True ,width =1).figure
     st.pyplot(cost,use_container_width=True)    
 if chosencusts >1 and chosenprods ==1:
     Inv_Prodplot = Inv_Prodplot[['Inv_P1','Demand_c1_p1','Demand_c1_P1', 'Fullfilled_c1_P1', 'Backorders_c1_P1',
