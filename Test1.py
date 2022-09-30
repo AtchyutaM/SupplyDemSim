@@ -204,18 +204,18 @@ if Select_DemandStrategy == 'Normal Distibution':
                 st.write(f"St Dev of Demand for Product 2: {ChosenDemandStDevP2}")
         
 #For debug
-# chosenprodstages = 1
-# chosentime = 20
-# ChosenStartsP1 = 10
-# ChosenStartsP2 = 10
-# ChosenDemandP1 = 10
-# ChosenDemandP2 = 0
-# ChosenDemandStDevP2 = 0
-# ChosenDemandStDevP1 = 0
-# chosenprods = 1
-# chosencusts = 1
-# IntialInv1 = 20
-# IntialInv2 = 0
+chosenprodstages = 1
+chosentime = 20
+ChosenStartsP1 = 10
+ChosenStartsP2 = 10
+ChosenDemandP1 = 10
+ChosenDemandP2 = 0
+ChosenDemandStDevP2 = 0
+ChosenDemandStDevP1 = 0
+chosenprods = 1
+chosencusts = 1
+IntialInv1 = 20
+IntialInv2 = 0
 
 ChosenDemandStDevP1 = ChosenDemandCVP1 * ChosenDemandP1
 ChosenDemandStDevP2 = ChosenDemandCVP2 * ChosenDemandP2
@@ -572,7 +572,14 @@ if chosencusts == 1 and chosenprods ==1:
     f = Inv_Prodplot.plot(x='Periods', kind ='bar',stacked=False,width =1).figure
     st.pyplot(f,use_container_width=True)
     
+
+    st.header("Cost Data:")
     Costplot = Costs_Prod1[['FGICosts','BOCosts']]
+    Totalcost = Costs_Prod1['FGICosts'].sum() + Costs_Prod1['BOCosts'].sum()
+    TotalFGICost = Costs_Prod1['FGICosts'].sum()
+    TotalBOCost = Costs_Prod1['BO'].sum()
+    st.write('The Total cost across all Periods is: {Totalcost}')
+    
     Costplot['Periods'] = Costs_Prod1.index.copy()
     cost = Costplot.plot(x='Periods', kind ='bar',stacked=True ,width =1).figure
     st.pyplot(cost,use_container_width=True)    
