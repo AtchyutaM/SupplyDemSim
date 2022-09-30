@@ -230,7 +230,7 @@ column_names.extend(["Inv"])
 no_of_stages = chosenprodstages
 #row_names = ["Period 0","Period 1", "Period 2", "Period 3", "Period 4","Period 5", "Period 6",
 # "Period 7", "Period 8", "Period 9", "Period 10"]
-row_names = ['Period ' + str(x) for x in range(1,100)]
+row_names = ['Period ' + str(x) for x in range(1,10000)]
 row_names = row_names[0:chosentime+1]
 
 Products = ["Prod 1","Prod 2"]    
