@@ -56,8 +56,8 @@ Select_DemandStrategy = st.sidebar.selectbox(
 # st.write('Note: Granular mode offers greater control of releases, demand and Inventories across all time periods')
 
 # Costs:
-InvCost = 1
-BoCost = 2
+FGICost = 1
+BOCost = 2
 SupCost = 0
 ProdCost = 0
 
@@ -487,7 +487,11 @@ for i in range(len(row_names)):
 
 
 #CostCalculation:
-
+column_names_costs = ["BOCosts","FGICosts","ReleaseCosts"]
+zero_data_costs = np.zeros(shape=(len(row_names),len(column_names_costs)))
+Costs_Prod1 = pd.DataFrame(zero_data_dem,row_names, column_names_dem)
+Costs_Prod1["FGICosts"] = Inv_Prod1['FGI'] * FGICost
+Costs_Prod1["BOCosts"] = Inv_Prod1['Backorders_c1'] * BOCost
 
 
 print(Inv_Prod1)
@@ -566,6 +570,11 @@ if chosencusts == 1 and chosenprods ==1:
     #fig=plt.figure()
     f = Inv_Prodplot.plot(x='Periods', kind ='bar',stacked=False,width =1).figure
     st.pyplot(f,use_container_width=True)
+    
+    Costplot = Costs_Prod1[['FGICosts','BOCosts']]
+    Costplot['Periods'] = Inv_Prod1.index.copy()
+    cost = Inv_Prodplot.plot(x='Periods', kind ='bar',stacked=True ,width =1).figure
+    st.pyplot(cost,use_container_width=True)    
 if chosencusts >1 and chosenprods ==1:
     Inv_Prodplot = Inv_Prodplot[['Inv_P1','Demand_c1_p1','Demand_c1_P1', 'Fullfilled_c1_P1', 'Backorders_c1_P1',
        'Demand_c2_P1', 'Fullfilled_c2_P1', 'Backorders_c2_P1']]
