@@ -198,18 +198,18 @@ if Select_DemandStrategy == 'Normal Distibution':
                 st.write(f"St Dev of Demand for Product 2: {ChosenDemandStDevP2}")
         
 #For debug
-# chosenprodstages = 1
-# chosentime = 20
-# ChosenStartsP1 = 10
-# ChosenStartsP2 = 10
-# ChosenDemandP1 = 10
-# ChosenDemandP2 = 0
-# ChosenDemandStDevP2 = 0
-# ChosenDemandStDevP1 = 0
-# chosenprods = 1
-# chosencusts = 1
-# IntialInv1 = 0
-# IntialInv2 = 0
+chosenprodstages = 1
+chosentime = 20
+ChosenStartsP1 = 10
+ChosenStartsP2 = 10
+ChosenDemandP1 = 10
+ChosenDemandP2 = 0
+ChosenDemandStDevP2 = 0
+ChosenDemandStDevP1 = 0
+chosenprods = 1
+chosencusts = 1
+IntialInv1 = 0
+IntialInv2 = 0
 
 ChosenDemandStDevP1 = ChosenDemandCVP1 * ChosenDemandP1
 ChosenDemandStDevP2 = ChosenDemandCVP2 * ChosenDemandP2
@@ -354,108 +354,124 @@ for i in range(len(row_names)):
             # Do nothing about demand in period 0
         # Step 4: Update Inv DF with Supply and Demand results
         Inv_Prod1["Inv"][i] =  Prod1_Supply["Inv"][i]
-        Inv_Prod2["Inv"][i] =  Prod2_Supply["Inv"][i]
+        if chosenprods > 1:
+            Inv_Prod2["Inv"][i] =  Prod2_Supply["Inv"][i]
         Inv_Prod1['FGI'][i] =  Inv_Prod1["Inv"][i]
-        Inv_Prod2['FGI'][i] =  Inv_Prod2["Inv"][i]
+        if chosenprods > 1:
+            Inv_Prod2['FGI'][i] =  Inv_Prod2["Inv"][i]
         # Step 5: Run the start policy
         #Prod1_Supply.iloc[i,0] = IntialRel[0]
         #Prod2_Supply.iloc[i,0] = IntialRel[1]
         Prod1_Supply.iloc[i,0] = 0
-        Prod2_Supply.iloc[i,0] = 0
+        if chosenprods > 1:
+            Prod2_Supply.iloc[i,0] = 0
       
     else:
         # Step 1: run the factory backwards
         #move from last step to inv
         Prod1_Supply["Inv"][i] = Prod1_Supply.iloc[i-1,chosenprodstages]*p_move + Inv_Prod1['FGI'][i-1]
-        Prod2_Supply["Inv"][i] = Prod2_Supply.iloc[i-1,chosenprodstages]*p_move + Inv_Prod2['FGI'][i-1]
+        if chosenprods > 1:
+            Prod2_Supply["Inv"][i] = Prod2_Supply.iloc[i-1,chosenprodstages]*p_move + Inv_Prod2['FGI'][i-1]
         for j in range(no_of_stages):
             k = no_of_stages - (j)
             # What ever sits from last period moves to next period 
             Prod1_Supply.iloc[i,k] = Prod1_Supply.iloc[i-1,k] * p_sit + Prod1_Supply.iloc[i-1][k-1]*p_move
-            Prod2_Supply.iloc[i,k] = Prod2_Supply.iloc[i-1,k] * p_sit + Prod2_Supply.iloc[i-1][k-1]*p_move
+            if chosenprods > 1:
+                Prod2_Supply.iloc[i,k] = Prod2_Supply.iloc[i-1,k] * p_sit + Prod2_Supply.iloc[i-1][k-1]*p_move
         #calculate releases:
         if Select_StartStrategy == "CONWIP":  
             TotalWIP = Prod1_Supply[WIP_names].sum(axis=1)
-            if chosencusts > 1:
+            if chosenprods > 1:
                 TotalWIP = Prod1_Supply[WIP_names].sum(axis=1) + Prod2_Supply[WIP_names].sum(axis=1)
             AvailforRelease = CONWIPTotal - TotalWIP[i]
             if AvailforRelease >= ChosenDemandP1 + ChosenDemandP2:
                 NewReleases_Prod1[i] = ChosenDemandP1
-                if chosencusts > 1:
+                if chosenprods> 1:
                     NewReleases_Prod2[i] = ChosenDemandP2
             else:
                 NewReleases_Prod1[i] = AvailforRelease/chosencusts
-                if chosencusts > 1:
+                if chosenprods > 1:
                     NewReleases_Prod2[i] = AvailforRelease/chosencusts
         Prod1_Supply.iloc[i,0] = NewReleases_Prod1[i]
-        if chosencusts > 1:
+        if chosenprods > 1:
             Prod2_Supply.iloc[i,0] = NewReleases_Prod2[i]
         WIP =  Prod1_Supply[WIP_names].sum(axis=1) + Prod2_Supply[WIP_names].sum(axis=1)
 
         # Step 2: update the warehouse with the factory output
         Inv_Prod1["Inv"][i] =  Prod1_Supply["Inv"][i]
-        Inv_Prod2["Inv"][i] =  Prod2_Supply["Inv"][i]
+        if chosenprods > 1:
+            Inv_Prod2["Inv"][i] =  Prod2_Supply["Inv"][i]
         
         # Step 3: Run the demand backwards
         dem_cust1_prod1['Current Period'] [i] = dem_cust1_prod1.iloc[i-1,chosenprodstages]*p_move + Inv_Prod1['Backorders_c1'][i-1]
-        dem_cust1_prod2['Current Period'] [i] = dem_cust1_prod2.iloc[i-1,chosenprodstages]*p_move + Inv_Prod2['Backorders_c1'][i-1]
-        if chosencusts > 1:
+        if chosenprods > 1 and chosencusts == 1:
+            dem_cust1_prod2['Current Period'] [i] = dem_cust1_prod2.iloc[i-1,chosenprodstages]*p_move + Inv_Prod2['Backorders_c1'][i-1]
+        if chosencusts > 1 and chosenprods == 1:
             dem_cust2_prod1['Current Period'] [i] = dem_cust2_prod1.iloc[i-1,chosenprodstages]*p_move + Inv_Prod1['Backorders_c2'][i-1]
+        if chosenprods > 1 and chosencusts>1:    
             dem_cust2_prod2['Current Period'] [i] = dem_cust2_prod2.iloc[i-1,chosenprodstages]*p_move + Inv_Prod2['Backorders_c2'][i-1]  
         for j in range(no_of_stages):
             k = no_of_stages - (j)
             dem_cust1_prod1.iloc[i,k] = dem_cust1_prod1.iloc[i-1,k] * p_sit_dem + dem_cust1_prod1.iloc[i-1][k-1]*p_move_dem
-            dem_cust1_prod2.iloc[i,k] = dem_cust1_prod2.iloc[i-1,k] * p_sit_dem + dem_cust1_prod2.iloc[i-1][k-1]*p_move_dem
-            if chosencusts > 1:
+            if chosenprods > 1 and chosencusts == 1:
+                dem_cust1_prod2.iloc[i,k] = dem_cust1_prod2.iloc[i-1,k] * p_sit_dem + dem_cust1_prod2.iloc[i-1][k-1]*p_move_dem
+            if chosencusts > 1 and chosenprods == 1:
                 dem_cust2_prod1.iloc[i,k] = dem_cust2_prod1.iloc[i-1,k] * p_sit_dem + dem_cust2_prod1.iloc[i-1][k-1]*p_move_dem
+            if chosenprods > 1 and chosencusts>1:
                 dem_cust2_prod2.iloc[i,k] = dem_cust2_prod2.iloc[i-1,k] * p_sit_dem + dem_cust2_prod2.iloc[i-1][k-1]*p_move_dem
         dem_cust1_prod1['New Order'] [i] = NewOrders_Prod1_cust1[i]
-        dem_cust1_prod2['New Order'] [i] = NewOrders_Prod2_cust1[i]
-        if chosencusts >1:
+        if chosenprods > 1 and chosencusts == 1:
+            dem_cust1_prod2['New Order'] [i] = NewOrders_Prod2_cust1[i]
+        if chosencusts > 1 and chosenprods == 1:
             dem_cust2_prod1['New Order'] [i] = NewOrders_Prod1_cust2[i]
+        if chosenprods > 1 and chosencusts>1:
             dem_cust2_prod2['New Order'] [i] = NewOrders_Prod2_cust2[i]
-            print("I am inside even through it should be",i)
-        print("This is outside")  
 
         
         # Step 4: Run the Fill policy
         if (dem_cust1_prod1['Current Period'] [i]) != 0 :
             FillStrat_prod1['Fill Cust1'] [i] =  dem_cust1_prod1['Current Period'] [i]/ (dem_cust1_prod1['Current Period'] [i])
-            if chosencusts > 1:
+            if chosencusts > 1 and chosenprods == 1:
                 FillStrat_prod1['Fill Cust1'] [i] =  dem_cust1_prod1['Current Period'] [i]/ (dem_cust1_prod1['Current Period'] [i] + dem_cust2_prod1['Current Period'] [i])
                 FillStrat_prod1['Fill Cust2'] [i] =  dem_cust2_prod1['Current Period'] [i]/ (dem_cust1_prod1['Current Period'] [i] + dem_cust2_prod1['Current Period'] [i])
-            FillStrat_prod2['Fill Cust1'] [i] =  dem_cust1_prod2['Current Period'] [i]/ (dem_cust1_prod2['Current Period'] [i])
-            if chosencusts > 1:
-                FillStrat_prod2['Fill Cust1'] [i] =  dem_cust1_prod2['Current Period'] [i]/ (dem_cust1_prod2['Current Period'] [i] + dem_cust2_prod2['Current Period'] [i])
-                FillStrat_prod2['Fill Cust2'] [i] =  dem_cust2_prod2['Current Period'] [i]/ (dem_cust1_prod2['Current Period'] [i] + dem_cust2_prod2['Current Period'] [i])
+            if chosenprods > 1:
+                FillStrat_prod2['Fill Cust1'] [i] =  dem_cust1_prod2['Current Period'] [i]/ (dem_cust1_prod2['Current Period'] [i])
+                if chosenprods > 1 and chosencusts>1:
+                    FillStrat_prod2['Fill Cust1'] [i] =  dem_cust1_prod2['Current Period'] [i]/ (dem_cust1_prod2['Current Period'] [i] + dem_cust2_prod2['Current Period'] [i])
+                    FillStrat_prod2['Fill Cust2'] [i] =  dem_cust2_prod2['Current Period'] [i]/ (dem_cust1_prod2['Current Period'] [i] + dem_cust2_prod2['Current Period'] [i])
             
         # Step 5: Update Inv DF with Supply and Demand results
         Inv_Prod1['Demand_c1'] [i] = dem_cust1_prod1['Current Period'] [i]
-        if chosencusts > 1:
+        if chosencusts > 1 and chosenprods == 1:
             Inv_Prod1['Demand_c2'] [i] = dem_cust2_prod1['Current Period'] [i]
-        Inv_Prod2['Demand_c1'] [i] = dem_cust1_prod2['Current Period'] [i]
-        if chosencusts > 1:
+        if chosenprods > 1 and chosencusts == 1:
+            Inv_Prod2['Demand_c1'] [i] = dem_cust1_prod2['Current Period'] [i]
+        if chosenprods > 1 and chosencusts>1:
             Inv_Prod2['Demand_c2'] [i] = dem_cust2_prod2['Current Period'] [i]
         
         Inv_Prod1['Fullfilled_c1'] [i] = min((Inv_Prod1["Inv"][i]* FillStrat_prod1['Fill Cust1'] [i]),Inv_Prod1['Demand_c1'] [i])
-        if chosencusts > 1:
+        if chosencusts > 1 and chosenprods == 1:
             Inv_Prod1['Fullfilled_c2'] [i] = min((Inv_Prod1["Inv"][i]* FillStrat_prod1['Fill Cust2'] [i]),Inv_Prod1['Demand_c2'] [i])
-        Inv_Prod2['Fullfilled_c1'] [i] = min((Inv_Prod2["Inv"][i]* FillStrat_prod2['Fill Cust1'] [i]),Inv_Prod2['Demand_c1'] [i])
-        if chosencusts > 1:
+        if chosenprods > 1 and chosencusts == 1:
+            Inv_Prod2['Fullfilled_c1'] [i] = min((Inv_Prod2["Inv"][i]* FillStrat_prod2['Fill Cust1'] [i]),Inv_Prod2['Demand_c1'] [i])
+        if chosenprods > 1 and chosencusts>1:
             Inv_Prod2['Fullfilled_c2'] [i] = min((Inv_Prod2["Inv"][i]* FillStrat_prod2['Fill Cust2'] [i]),Inv_Prod2['Demand_c2'] [i])
          
         Inv_Prod1['Backorders_c1'] [i] = max(Inv_Prod1['Demand_c1'] [i] - Inv_Prod1['Fullfilled_c1'] [i], 0)
-        if chosencusts > 1:
+        if chosencusts > 1 and chosenprods == 1:
             Inv_Prod1['Backorders_c2'] [i] = max(Inv_Prod1['Demand_c2'] [i] - Inv_Prod1['Fullfilled_c2'] [i], 0)
-        Inv_Prod2['Backorders_c1'] [i] = max(Inv_Prod2['Demand_c1'] [i] - Inv_Prod2['Fullfilled_c1'] [i], 0)
-        if chosencusts > 1:
+        if chosenprods > 1 and chosencusts == 1:
+            Inv_Prod2['Backorders_c1'] [i] = max(Inv_Prod2['Demand_c1'] [i] - Inv_Prod2['Fullfilled_c1'] [i], 0)
+        if chosenprods > 1 and chosencusts>1:
             Inv_Prod2['Backorders_c2'] [i] = max(Inv_Prod2['Demand_c2'] [i] - Inv_Prod2['Fullfilled_c2'] [i], 0)
         
         Inv_Prod1['FGI'][i] =  Inv_Prod1["Inv"][i] -  Inv_Prod1['Fullfilled_c1'] [i]
-        Inv_Prod2['FGI'][i] =  Inv_Prod2["Inv"][i] -  Inv_Prod2['Fullfilled_c1'] [i]
+        if chosenprods > 1:
+            Inv_Prod2['FGI'][i] =  Inv_Prod2["Inv"][i] -  Inv_Prod2['Fullfilled_c1'] [i]
         if chosencusts > 1:
             Inv_Prod1['FGI'][i] =  Inv_Prod1["Inv"][i] -  Inv_Prod1['Fullfilled_c1'] [i] - Inv_Prod1['Fullfilled_c2'] [i]
-            Inv_Prod2['FGI'][i] =  Inv_Prod2["Inv"][i] -  Inv_Prod2['Fullfilled_c1'] [i] - Inv_Prod2['Fullfilled_c2'] [i]
+            if chosenprods > 1:
+                Inv_Prod2['FGI'][i] =  Inv_Prod2["Inv"][i] -  Inv_Prod2['Fullfilled_c1'] [i] - Inv_Prod2['Fullfilled_c2'] [i]
 
 
 
