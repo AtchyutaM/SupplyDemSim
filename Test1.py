@@ -204,18 +204,18 @@ if Select_DemandStrategy == 'Normal Distibution':
                 st.write(f"St Dev of Demand for Product 2: {ChosenDemandStDevP2}")
         
 #For debug
-chosenprodstages = 1
-chosentime = 20
-ChosenStartsP1 = 10
-ChosenStartsP2 = 10
-ChosenDemandP1 = 10
-ChosenDemandP2 = 0
-ChosenDemandStDevP2 = 0
-ChosenDemandStDevP1 = 0
-chosenprods = 1
-chosencusts = 1
-IntialInv1 = 20
-IntialInv2 = 0
+# chosenprodstages = 1
+# chosentime = 20
+# ChosenStartsP1 = 10
+# ChosenStartsP2 = 10
+# ChosenDemandP1 = 10
+# ChosenDemandP2 = 0
+# ChosenDemandStDevP2 = 0
+# ChosenDemandStDevP1 = 0
+# chosenprods = 1
+# chosencusts = 1
+# IntialInv1 = 20
+# IntialInv2 = 0
 
 ChosenDemandStDevP1 = ChosenDemandCVP1 * ChosenDemandP1
 ChosenDemandStDevP2 = ChosenDemandCVP2 * ChosenDemandP2
