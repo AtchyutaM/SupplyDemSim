@@ -550,14 +550,14 @@ if chosencusts == 1 and chosenprods ==1:
     Inv_Prodplot = Inv_Prodplot[['Inv','Demand_c1','Fullfilled_c1','Backorders_c1']]
     Inv_Prodplot['Periods'] = Inv_Prod1.index.copy()
     #fig=plt.figure()
-    f = Inv_Prodplot.plot(x='Periods', kind ='bar',stacked=False,width =1.5).figure
+    f = Inv_Prodplot.plot(x='Periods', kind ='bar',stacked=False,width =1).figure
     st.pyplot(f,use_container_width=True)
 if chosencusts >1 and chosenprods ==1:
     Inv_Prodplot = Inv_Prodplot[['Inv_P1','Demand_c1_p1','Demand_c1_P1', 'Fullfilled_c1_P1', 'Backorders_c1_P1',
        'Demand_c2_P1', 'Fullfilled_c2_P1', 'Backorders_c2_P1']]
     Inv_Prodplot['Periods'] = Inv_Prod1.index.copy()
     #fig=plt.figure()
-    f = Inv_Prodplot.plot(x='Periods', kind ='bar',stacked=False,width =1.5).figure
+    f = Inv_Prodplot.plot(x='Periods', kind ='bar',stacked=False,width =1).figure
     st.pyplot(f,use_container_width=True)
 if chosencusts >1 and chosenprods >1:
     Inv_Prodplot = Inv_Prodplot[['Inv_P1', 'Demand_c1_P1', 'Fullfilled_c1_P1', 'Backorders_c1_P1',
@@ -574,7 +574,7 @@ if chosencusts >1 and chosenprods >1:
            'Periods_P1', 'Inv_P2', 'Demand_c1_P2', 'Fullfilled_c1_P2', 'Demand_c2_P2', 'Fullfilled_c2_P2']]
         Plot_int1['Periods'] = Inv_Prod1.index.copy()
         #fig=plt.figure()
-        f = Plot_int1.plot(x='Periods', kind ='bar',stacked=False,width =1.5).figure
+        f = Plot_int1.plot(x='Periods', kind ='bar',stacked=False,width =1).figure
         st.pyplot(f,use_container_width=True)
     elif max(Inv_Prodplot[['Backorders_c1_P1','Backorders_c1_P2','Backorders_c2_P2','Backorders_c2_P2']].sum(axis=1)) > 3*(ChosenStartsP1+ChosenStartsP2):
         index_min = np.argmax((Inv_Prodplot[['Backorders_c1_P1','Backorders_c1_P2','Backorders_c2_P2','Backorders_c2_P2']].sum(axis=1)) > 3*(ChosenStartsP1+ChosenStartsP2))
@@ -584,7 +584,7 @@ if chosencusts >1 and chosenprods >1:
            'Periods_P1', 'Inv_P2', 'Demand_c1_P2', 'Fullfilled_c1_P2', 'Demand_c2_P2', 'Fullfilled_c2_P2']]
         Plot_int1['Periods'] = Inv_Prod1.index.copy()
         #fig=plt.figure()
-        f = Plot_int1.plot(x='Periods', kind ='bar',stacked=False,width =1.5).figure
+        f = Plot_int1.plot(x='Periods', kind ='bar',stacked=False,width =1).figure
         st.pyplot(f,use_container_width=True)
     else:
         Plot_int1 = Inv_Prodplot[['Inv_P1', 'Demand_c1_P1', 'Fullfilled_c1_P1', 'Backorders_c1_P1',
@@ -592,7 +592,7 @@ if chosencusts >1 and chosenprods >1:
            'Periods_P1', 'Inv_P2', 'Demand_c1_P2', 'Fullfilled_c1_P2', 'Demand_c2_P2', 'Fullfilled_c2_P2']]
         Plot_int1['Periods'] = Inv_Prod1.index.copy()
         #fig=plt.figure()
-        f = Plot_int1.plot(x='Periods', kind ='bar',stacked=False,width =1.5).figure
+        f = Plot_int1.plot(x='Periods', kind ='bar',stacked=False,width =1).figure
         st.pyplot(f,use_container_width=True)   
 
 #st.write("Demand Data")
