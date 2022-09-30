@@ -55,6 +55,12 @@ Select_DemandStrategy = st.sidebar.selectbox(
 #     st.write(f"You choose {Mode} Mode")
 # st.write('Note: Granular mode offers greater control of releases, demand and Inventories across all time periods')
 
+# Costs:
+InvCost = 1
+BoCost = 2
+SupCost = 0
+ProdCost = 0
+
 #Select Parameters
 st.header('Select Parameters:') 
 
@@ -208,7 +214,7 @@ if Select_DemandStrategy == 'Normal Distibution':
 # ChosenDemandStDevP1 = 0
 # chosenprods = 1
 # chosencusts = 1
-# IntialInv1 = 0
+# IntialInv1 = 20
 # IntialInv2 = 0
 
 ChosenDemandStDevP1 = ChosenDemandCVP1 * ChosenDemandP1
@@ -341,15 +347,20 @@ for i in range(len(row_names)):
     if i == 0: # Releases
         # Step 1: run the factory backwards
         Prod1_Supply["Inv"][i] = IntialInv[0] # Allocate initial final inv
-        Prod2_Supply["Inv"][i] = IntialInv[1]
+        if chosenprods > 1:
+            Prod2_Supply["Inv"][i] = IntialInv[1]
         for j in range(no_of_stages):
             k = no_of_stages - (j)
             Prod1_Supply.iloc[i,k] = IntialInv_Stage_Prod1[k-1]
-            Prod2_Supply.iloc[i,k] = IntialInv_Stage_Prod1[k-1]
-        WIP =  Prod1_Supply[WIP_names].sum(axis=1) + Prod2_Supply[WIP_names].sum(axis=1)
+            if chosenprods > 1:
+                Prod2_Supply.iloc[i,k] = IntialInv_Stage_Prod1[k-1]
+        WIP =  Prod1_Supply[WIP_names].sum(axis=1)
+        if chosenprods > 1:
+            WIP =  Prod1_Supply[WIP_names].sum(axis=1) + Prod2_Supply[WIP_names].sum(axis=1)
         # Step 2: update the warehouse with the factory output
         Inv_Prod1["Inv"][i] =  Prod1_Supply["Inv"][i]
-        Inv_Prod2["Inv"][i] =  Prod2_Supply["Inv"][i]
+        if chosenprods > 1:
+            Inv_Prod2["Inv"][i] =  Prod2_Supply["Inv"][i]
         # Step 3: Run the demand backwards
             # Do nothing about demand in period 0
         # Step 4: Update Inv DF with Supply and Demand results
@@ -473,6 +484,9 @@ for i in range(len(row_names)):
             if chosenprods > 1:
                 Inv_Prod2['FGI'][i] =  Inv_Prod2["Inv"][i] -  Inv_Prod2['Fullfilled_c1'] [i] - Inv_Prod2['Fullfilled_c2'] [i]
 
+
+
+#CostCalculation:
 
 
 
