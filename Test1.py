@@ -127,14 +127,14 @@ left_column5, right_column5 = st.columns(2)
 with left_column5:
     IntialInv1 =  st.slider(
     'Choose Intial Inv for Product 1',
-    0, 10)
+    0, 100)
     st.write(f"You choose {IntialInv1} units as Inv of product 1")
     IntialInv2 = 0
 if chosenprods>1:
     with right_column5:
         IntialInv2 =  st.slider(
         'Choose Intial Inv for product 2',
-        0, 10)
+        0, 100)
         st.write(f"You choose {IntialInv2} units as Inv for product 2")
 
 st.subheader('Fill policy:')
@@ -184,7 +184,7 @@ if Select_DemandStrategy == 'Normal Distibution':
     with left_column7:
         ChosenDemandCVP1 =  st.slider(
         'Select Coefficent of Variation (CV) for Demand of Product 1',
-        0, 2)
+        0.0, 2.0)
         ChosenDemandStDevP1 = ChosenDemandCVP1 * ChosenDemandP1
         st.write(f"St Dev of Demand for Product 1: {ChosenDemandStDevP1}")
         ChosenDemandCVP2  = 0
@@ -193,7 +193,7 @@ if Select_DemandStrategy == 'Normal Distibution':
             with right_column7:
                 ChosenDemandCVP2 = st.slider(
                 'Select Coefficent of Variation (CV) for Demand of Product 2',
-                0, 2)
+                0.0, 2.0)
                 ChosenDemandStDevP2 = ChosenDemandCVP2 * ChosenDemandP2
                 st.write(f"St Dev of Demand for Product 2: {ChosenDemandStDevP2}")
         
