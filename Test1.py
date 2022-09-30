@@ -578,9 +578,9 @@ if chosencusts == 1 and chosenprods ==1:
     Totalcost = Costs_Prod1['FGICosts'].sum() + Costs_Prod1['BOCosts'].sum()
     TotalFGICost = Costs_Prod1['FGICosts'].sum()
     TotalBOCost = Costs_Prod1['BOCosts'].sum()
-    st.write('The Total cost across all Periods is: {Totalcost}')
-    st.write('The FGI cost across all Periods is: {TotalFGICost}')
-    st.write('The BO cost across all Periods is: {TotalBOCost}')
+    st.write(f'The Total cost across all Periods is: {Totalcost}')
+    st.write(f'The FGI cost across all Periods is: {TotalFGICost}')
+    st.write(f'The BO cost across all Periods is: {TotalBOCost}')
     
     Costplot['Periods'] = Costs_Prod1.index.copy()
     cost = Costplot.plot(x='Periods', kind ='bar',stacked=True ,width =1).figure
