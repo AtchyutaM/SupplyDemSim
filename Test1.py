@@ -83,7 +83,7 @@ left_column2, right_column2 = st.columns(2)
 with left_column2:
     chosentime =  st.slider(
     'Choose Number of Time Periods',
-    0, 10000)
+    0, 100)
     selected(f"You choose {chosentime} Time Periods")
 
 with right_column2:
