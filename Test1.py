@@ -240,9 +240,9 @@ if Select_DemandStrategy == 'Uniform Distribution':
 # chosencusts = 1
 # IntialInv1 = 20
 # IntialInv2 = 0
-
-ChosenDemandStDevP1 = ChosenDemandCVP1 * ChosenDemandP1
-ChosenDemandStDevP2 = ChosenDemandCVP2 * ChosenDemandP2
+if Select_DemandStrategy == 'Normal Distibution':
+    ChosenDemandStDevP1 = ChosenDemandCVP1 * ChosenDemandP1
+    ChosenDemandStDevP2 = ChosenDemandCVP2 * ChosenDemandP2
 # create supply datafrme
 
 WIP_names=["Stage 1","Stage 2","Stage 3","Stage 4"]
