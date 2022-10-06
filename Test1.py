@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 """
+Created on Thu Oct  6 15:40:47 2022
+
+@author: atchyuta
+"""
+
+# -*- coding: utf-8 -*-
+"""
 Created on Mon Jan  4 11:18:53 2021
 
 @author: atchyuta
@@ -638,4 +645,3 @@ if chosencusts >1 and chosenprods >1:
 
 #Y = st.slider('Select Number of Customers')  # 👈 this is a widget
 #st.write('Number of Customers Selected', 'is', Y)
-
