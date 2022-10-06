@@ -6,11 +6,6 @@ Created on Thu Oct  6 15:40:47 2022
 """
 
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Jan  4 11:18:53 2021
-
-@author: atchyuta
-"""
 ## Bring in data
 
 import pandas as pd
@@ -218,6 +213,13 @@ if Select_DemandStrategy == 'Uniform Distribution':
         'Select a range of values',
         0.0, 100.0, (25.0, 75.0))
         st.write('Demand for Product 1 is uniformly distributed between:', values_P1)
+        ChosenDemandP2 = 0
+        ChosenDemandStDevP1 = 0
+        ChosenDemandStDevP2 = 0
+        ChosenDemandStDevP1 = 0
+        ChosenDemandStDevP2 = 0
+        ChosenDemandCVP1 = 0
+        ChosenDemandCVP2 = 0
         #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
         if chosencusts> 1:
             with right_column6:
