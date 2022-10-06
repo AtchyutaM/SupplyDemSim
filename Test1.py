@@ -48,7 +48,7 @@ Select_StartStrategy = st.sidebar.selectbox(
 
 Select_DemandStrategy = st.sidebar.selectbox(
   'Select Demand',
-    ( 'Fixed Demand','Normal Distibution')
+    ( 'Fixed Demand','Normal Distibution','Uniform Distribution')
 )
 
 # Granular Mode
@@ -209,7 +209,22 @@ if Select_DemandStrategy == 'Normal Distibution':
                 0.0, 2.0)
                 ChosenDemandStDevP2 = ChosenDemandCVP2 * ChosenDemandP2
                 st.write(f"St Dev of Demand for Product 2: {ChosenDemandStDevP2}")
-        
+
+
+if Select_DemandStrategy == 'Uniform Distribution':
+    left_column6, right_column6 = st.columns(2)
+    with left_column6:
+        values_P1 = st.slider(
+        'Select a range of values',
+        0.0, 100.0, (25.0, 75.0))
+        st.write('Demand for Product 1 is uniformly distributed between:', values_P1)
+        #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
+        if chosencusts> 1:
+            with right_column6:
+                values_P2 = st.slider(
+                'Select a range of values',
+                0.0, 100.0, (25.0, 75.0))
+                st.write('Demand for Product 1 is uniformly distributed between:', values_P2)
 #For debug
 # chosenprodstages = 1
 # chosentime = 20
