@@ -319,19 +319,25 @@ NewReleases_Prod2 = np.zeros(shape=(len(row_names),1), dtype=int) + ChosenStarts
 
 # New order generation
 # New orders coming in for each period
+if Select_DemandStrategy == 'Normal Distibution' or 'Fixed Starts':
+    np.random.seed(30)
+    NewOrders_Prod1_cust1 =  (np.random.normal(size=(len(row_names),1)) * ChosenDemandStDevP1) + ChosenDemandP1
+    NewOrders_Prod1_cust1 = np.maximum(NewOrders_Prod1_cust1,np.zeros(shape=NewOrders_Prod1_cust1.shape, dtype = NewOrders_Prod1_cust1.dtype)) 
+    NewOrders_Prod2_cust1 =  (np.random.normal(size=(len(row_names),1)) * ChosenDemandStDevP2) + ChosenDemandP2
+    NewOrders_Prod2_cust1 = np.maximum(NewOrders_Prod2_cust1,np.zeros(shape=NewOrders_Prod2_cust1.shape, dtype = NewOrders_Prod2_cust1.dtype)) 
+    
+    if chosencusts > 1:
+        NewOrders_Prod1_cust2 =  (np.random.normal(size=(len(row_names),1)) * ChosenDemandStDevP1) + ChosenDemandP1 
+        NewOrders_Prod1_cust2 = np.maximum(NewOrders_Prod1_cust2,np.zeros(shape=NewOrders_Prod1_cust2.shape, dtype = NewOrders_Prod1_cust2.dtype)) 
+        NewOrders_Prod2_cust2 =  (np.random.normal(size=(len(row_names),1)) * ChosenDemandStDevP2)  + ChosenDemandP2
+        NewOrders_Prod2_cust2 = np.maximum(NewOrders_Prod2_cust2,np.zeros(shape=NewOrders_Prod2_cust2.shape, dtype = NewOrders_Prod2_cust2.dtype)) 
 
-np.random.seed(30)
-NewOrders_Prod1_cust1 =  (np.random.normal(size=(len(row_names),1)) * ChosenDemandStDevP1) + ChosenDemandP1
-NewOrders_Prod1_cust1 = np.maximum(NewOrders_Prod1_cust1,np.zeros(shape=NewOrders_Prod1_cust1.shape, dtype = NewOrders_Prod1_cust1.dtype)) 
-NewOrders_Prod2_cust1 =  (np.random.normal(size=(len(row_names),1)) * ChosenDemandStDevP2) + ChosenDemandP2
-NewOrders_Prod2_cust1 = np.maximum(NewOrders_Prod2_cust1,np.zeros(shape=NewOrders_Prod2_cust1.shape, dtype = NewOrders_Prod2_cust1.dtype)) 
-
-if chosencusts > 1:
-    NewOrders_Prod1_cust2 =  (np.random.normal(size=(len(row_names),1)) * ChosenDemandStDevP1) + ChosenDemandP1 
-    NewOrders_Prod1_cust2 = np.maximum(NewOrders_Prod1_cust2,np.zeros(shape=NewOrders_Prod1_cust2.shape, dtype = NewOrders_Prod1_cust2.dtype)) 
-    NewOrders_Prod2_cust2 =  (np.random.normal(size=(len(row_names),1)) * ChosenDemandStDevP2)  + ChosenDemandP2
-    NewOrders_Prod2_cust2 = np.maximum(NewOrders_Prod2_cust2,np.zeros(shape=NewOrders_Prod2_cust2.shape, dtype = NewOrders_Prod2_cust2.dtype)) 
-
+if Select_DemandStrategy == 'Uniform Distribution':
+    np.random.seed(30)
+    NewOrders_Prod1_cust1 =  np.random.uniform(values_P2,size=(len(row_names)))
+    NewOrders_Prod1_cust1 = np.maximum(NewOrders_Prod1_cust1,np.zeros(shape=NewOrders_Prod1_cust1.shape, dtype = NewOrders_Prod1_cust1.dtype)) 
+    NewOrders_Prod2_cust1 =  np.random.uniform(values_P2,size=(len(row_names)))
+    NewOrders_Prod2_cust1 = np.maximum(NewOrders_Prod2_cust1,np.zeros(shape=NewOrders_Prod2_cust1.shape, dtype = NewOrders_Prod2_cust1.dtype)) 
 
 column_names_inv = ["Inv","Demand_c1", "Fullfilled_c1", "Backorders_c1","FGI"]
 if chosencusts > 1:
