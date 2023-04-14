@@ -109,6 +109,23 @@ with left_column:
             'CV for Pms on M2:',
             0,2)
     if chosenprodstages == "3":
+        with middle_column:
+            t20 =  st.slider(
+            'Natural Processing time for M2 in mins',
+            0, 100)
+            c20 =  st.slider(
+            'CV of Natural Processing time for M2',
+            0, 1)
+            st.write('Select PM related paramters')
+            N2s =  st.slider(
+            'Average Number of units between PMs on M2:',
+            0,50)
+            t2s =  st.slider(
+            'Avearge Processing time for PMs on M2 in mins:',
+            0,50)
+            c2s =  st.slider(
+            'CV for Pms on M2:',
+            0,2)
         with right_column:
             t30 =  st.slider(
             'Natural Processing time for M3 in mins',
