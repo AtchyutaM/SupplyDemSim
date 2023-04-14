@@ -13,6 +13,7 @@ import numpy as np
 import streamlit as st
 import altair as alt
 import matplotlib.pyplot as plt
+from PIL import Image
 
 def selected(url):
      st.markdown(f'<p style="color:#33ff33;font-size:12px;border-radius:2%;">{url}</p>', unsafe_allow_html=True)
@@ -25,21 +26,7 @@ st.title('A Simple Supply Chain Dynamics Simulator')
 st.write('Version 1.2')
 
 #Sidebar Selections:
-Select_FillPolicy = st.sidebar.selectbox(
-  'Select Fill Policy',
-    ('Proprtional Allocation', 'Customer 1 Bias')
-)
 
-Select_StartStrategy = st.sidebar.selectbox(
-  'Select Start Strategy',
-    ( 'Fixed Starts','CONWIP')
-)
-
-# if Select_StartStrategy == "CONWIP":
-#     Select_SubStartStrategy = st.sidebar.selectbox(
-#       'Select Sub level Start Strategy',
-#         ( 'Releases equal to Demand','Set Manual start levels')
-#     )
 
 Select_DemandStrategy = st.sidebar.selectbox(
   'Select Demand',
@@ -57,11 +44,7 @@ Select_DemandStrategy = st.sidebar.selectbox(
 #     st.write(f"You choose {Mode} Mode")
 # st.write('Note: Granular mode offers greater control of releases, demand and Inventories across all time periods')
 
-# Costs:
-FGICost = 1
-BOCost = 2
-SupCost = 0
-ProdCost = 0
+
 
 #Select Parameters
 st.header('Select Parameters:') 
@@ -73,167 +56,172 @@ with left_column:
         'Choose Number of Serial Production Stages',
         ("1", "2", "3"))
     selected(f"You choose {chosenprodstages} Production Stages")
+    
+
+image = Image.open('100_200_Inv.png')
+
+st.image(image, caption='Sunrise by the mountains')
 
 
-with right_column:
-    chosencusts = st.radio(
-        'Choose Number of Customers',
-        ("1", "2"))
-    selected(f"You choose {chosencusts} customers")
+# with right_column:
+#     chosencusts = st.radio(
+#         'Choose Number of Customers',
+#         ("1", "2"))
+#     selected(f"You choose {chosencusts} customers")
 
 
-left_column2, right_column2 = st.columns(2)
-with left_column2:
-    chosentime =  st.slider(
-    'Choose Number of Time Periods',
-    0, 100)
-    selected(f"You choose {chosentime} Time Periods")
+# left_column2, right_column2 = st.columns(2)
+# with left_column2:
+#     chosentime =  st.slider(
+#     'Choose Number of Time Periods',
+#     0, 100)
+#     selected(f"You choose {chosentime} Time Periods")
 
-with right_column2:
-    chosenprodstages = st.radio(
-        'Choose Number of Serial Production Stages',
-        ("1", "2", "3"))
-    selected(f"You choose {chosenprodstages} Production Stages")
+# with right_column2:
+#     chosenprodstages = st.radio(
+#         'Choose Number of Serial Production Stages',
+#         ("1", "2", "3"))
+#     selected(f"You choose {chosenprodstages} Production Stages")
 
-## The actual program:
-chosencusts = int(chosencusts)  
-st.header('Parameters for Selected Policies:')    
+# ## The actual program:
+# chosencusts = int(chosencusts)  
+# st.header('Parameters for Selected Policies:')    
 
-st.subheader('Start Strategy:')
-selected2(f"Choosen Start Strategy: {Select_StartStrategy}")
+# st.subheader('Start Strategy:')
+# selected2(f"Choosen Start Strategy: {Select_StartStrategy}")
 
-if Select_StartStrategy == "Fixed Starts":
-    left_column3, right_column3 = st.columns(2)
-    # You can use a column just like st.sidebar:
-    with left_column3:
-        ChosenStartsP1 =  st.slider(
-        'Select Natural Processing time',
-        0, 100)
-        ChosenStartsP2 = 0
-        #st.write(f"You choose {chosenStarts} Fixed Starts for each product")
-
-
-#Select_StartStrategy = "CONWIP"
-
-if Select_StartStrategy == "CONWIP":
-    left_column4, right_column4 = st.columns(2)
-    # You can use a column just like st.sidebar:
-    with left_column4:
-        CONWIPTotal =  st.slider(
-        'Select CONWIP level:',
-        0, 100)
-        #st.write(f"You choose {chosenStarts} Fixed Starts for each product")
-        chosenStarts = 0
+# if Select_StartStrategy == "Fixed Starts":
+#     left_column3, right_column3 = st.columns(2)
+#     # You can use a column just like st.sidebar:
+#     with left_column3:
+#         ChosenStartsP1 =  st.slider(
+#         'Select Natural Processing time',
+#         0, 100)
+#         ChosenStartsP2 = 0
+#         #st.write(f"You choose {chosenStarts} Fixed Starts for each product")
 
 
-st.subheader('Initial Inventory:')
-left_column5, right_column5 = st.columns(2)
-with left_column5:
-    IntialInv1 =  st.slider(
-    'Choose Intial Inv for Product 1',
-    0, 100)
-    st.write(f"You choose {IntialInv1} units as Inv of product 1")
-    IntialInv2 = 0
+# #Select_StartStrategy = "CONWIP"
+
+# if Select_StartStrategy == "CONWIP":
+#     left_column4, right_column4 = st.columns(2)
+#     # You can use a column just like st.sidebar:
+#     with left_column4:
+#         CONWIPTotal =  st.slider(
+#         'Select CONWIP level:',
+#         0, 100)
+#         #st.write(f"You choose {chosenStarts} Fixed Starts for each product")
+#         chosenStarts = 0
 
 
-st.subheader('Fill policy:')
-st.write('Choosen Fill policy', Select_FillPolicy)
+# st.subheader('Initial Inventory:')
+# left_column5, right_column5 = st.columns(2)
+# with left_column5:
+#     IntialInv1 =  st.slider(
+#     'Choose Intial Inv for Product 1',
+#     0, 100)
+#     st.write(f"You choose {IntialInv1} units as Inv of product 1")
+#     IntialInv2 = 0
 
-st.subheader('Demand Generation policy:')
-selected2(f"Choosen Demand generation process is: {Select_DemandStrategy}")
 
-if Select_DemandStrategy == "Fixed Demand":
-    left_column6, right_column6 = st.columns(2)
-    with left_column6:
-        ChosenDemandP1 =  st.slider(
-        'Select Demand for Product 1',
-        0, 100)
-        ChosenDemandP2 = 0
-        ChosenDemandStDevP1 = 0
-        ChosenDemandStDevP2 = 0
-        ChosenDemandStDevP1 = 0
-        ChosenDemandStDevP2 = 0
-        ChosenDemandCVP1 = 0
-        ChosenDemandCVP2 = 0
-        #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
-        if chosencusts> 1:
-            with right_column6:
-                ChosenDemandP2 = st.slider(
-                'Select Demand for Product 2',
-                0, 100)
+# st.subheader('Fill policy:')
+# st.write('Choosen Fill policy', Select_FillPolicy)
+
+# st.subheader('Demand Generation policy:')
+# selected2(f"Choosen Demand generation process is: {Select_DemandStrategy}")
+
+# if Select_DemandStrategy == "Fixed Demand":
+#     left_column6, right_column6 = st.columns(2)
+#     with left_column6:
+#         ChosenDemandP1 =  st.slider(
+#         'Select Demand for Product 1',
+#         0, 100)
+#         ChosenDemandP2 = 0
+#         ChosenDemandStDevP1 = 0
+#         ChosenDemandStDevP2 = 0
+#         ChosenDemandStDevP1 = 0
+#         ChosenDemandStDevP2 = 0
+#         ChosenDemandCVP1 = 0
+#         ChosenDemandCVP2 = 0
+#         #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
+#         if chosencusts> 1:
+#             with right_column6:
+#                 ChosenDemandP2 = st.slider(
+#                 'Select Demand for Product 2',
+#                 0, 100)
                 
-if Select_DemandStrategy == 'Normal Distibution':
-    left_column6, right_column6 = st.columns(2)
-    with left_column6:
-        ChosenDemandP1 =  st.slider(
-        'Select Demand for Product 1',
-        0, 100)
-        ChosenDemandP2 = 0
-        ChosenDemandStDevP1 = 0
-        ChosenDemandStDevP2 = 0
-        ChosenDemandCVP1 = 0
-        ChosenDemandCVP2 = 0
-        #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
-        if chosencusts> 1:
-            with right_column6:
-                ChosenDemandP2 = st.slider(
-                'Select Demand for Product 2',
-                0, 100)
-    left_column7, right_column7 = st.columns(2)
-    with left_column7:
-        ChosenDemandCVP1 =  st.slider(
-        'Select Coefficent of Variation (CV) for Demand of Product 1',
-        0.0, 2.0)
-        ChosenDemandStDevP1 = ChosenDemandCVP1 * ChosenDemandP1
-        st.write(f"St Dev of Demand for Product 1: {ChosenDemandStDevP1}")
-        ChosenDemandCVP2  = 0
-        #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
-        if chosencusts> 1:
-            with right_column7:
-                ChosenDemandCVP2 = st.slider(
-                'Select Coefficent of Variation (CV) for Demand of Product 2',
-                0.0, 2.0)
-                ChosenDemandStDevP2 = ChosenDemandCVP2 * ChosenDemandP2
-                st.write(f"St Dev of Demand for Product 2: {ChosenDemandStDevP2}")
+# if Select_DemandStrategy == 'Normal Distibution':
+#     left_column6, right_column6 = st.columns(2)
+#     with left_column6:
+#         ChosenDemandP1 =  st.slider(
+#         'Select Demand for Product 1',
+#         0, 100)
+#         ChosenDemandP2 = 0
+#         ChosenDemandStDevP1 = 0
+#         ChosenDemandStDevP2 = 0
+#         ChosenDemandCVP1 = 0
+#         ChosenDemandCVP2 = 0
+#         #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
+#         if chosencusts> 1:
+#             with right_column6:
+#                 ChosenDemandP2 = st.slider(
+#                 'Select Demand for Product 2',
+#                 0, 100)
+#     left_column7, right_column7 = st.columns(2)
+#     with left_column7:
+#         ChosenDemandCVP1 =  st.slider(
+#         'Select Coefficent of Variation (CV) for Demand of Product 1',
+#         0.0, 2.0)
+#         ChosenDemandStDevP1 = ChosenDemandCVP1 * ChosenDemandP1
+#         st.write(f"St Dev of Demand for Product 1: {ChosenDemandStDevP1}")
+#         ChosenDemandCVP2  = 0
+#         #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
+#         if chosencusts> 1:
+#             with right_column7:
+#                 ChosenDemandCVP2 = st.slider(
+#                 'Select Coefficent of Variation (CV) for Demand of Product 2',
+#                 0.0, 2.0)
+#                 ChosenDemandStDevP2 = ChosenDemandCVP2 * ChosenDemandP2
+#                 st.write(f"St Dev of Demand for Product 2: {ChosenDemandStDevP2}")
 
 
-if Select_DemandStrategy == 'Uniform Distribution':
-    left_column6, right_column6 = st.columns(2)
-    with left_column6:
-        values_P1 = st.slider(
-        'Select a range of values',
-        0.0, 100.0, (25.0, 75.0))
-        st.write('Demand for Product 1 is uniformly distributed between:', values_P1)
-        ChosenDemandP2 = 0
-        ChosenDemandStDevP1 = 0
-        ChosenDemandStDevP2 = 0
-        ChosenDemandStDevP1 = 0
-        ChosenDemandStDevP2 = 0
-        ChosenDemandCVP1 = 0
-        ChosenDemandCVP2 = 0
-        #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
-        if chosencusts> 1:
-            with right_column6:
-                values_P2 = st.slider(
-                'Select a range of values',
-                0.0, 100.0, (25.0, 75.0))
-                st.write('Demand for Product 1 is uniformly distributed between:', values_P2)
-#For debug
-# chosenprodstages = 1
-# chosentime = 20
-# ChosenStartsP1 = 10
-# ChosenStartsP2 = 10
-# ChosenDemandP1 = 10
-# ChosenDemandP2 = 0
-# ChosenDemandStDevP2 = 0
-# ChosenDemandStDevP1 = 0
-# chosenprods = 1
-# chosencusts = 1
-# IntialInv1 = 20
-# IntialInv2 = 0
-if Select_DemandStrategy == 'Normal Distibution':
-    ChosenDemandStDevP1 = ChosenDemandCVP1 * ChosenDemandP1
-    ChosenDemandStDevP2 = ChosenDemandCVP2 * ChosenDemandP2
+# if Select_DemandStrategy == 'Uniform Distribution':
+#     left_column6, right_column6 = st.columns(2)
+#     with left_column6:
+#         values_P1 = st.slider(
+#         'Select a range of values',
+#         0.0, 100.0, (25.0, 75.0))
+#         st.write('Demand for Product 1 is uniformly distributed between:', values_P1)
+#         ChosenDemandP2 = 0
+#         ChosenDemandStDevP1 = 0
+#         ChosenDemandStDevP2 = 0
+#         ChosenDemandStDevP1 = 0
+#         ChosenDemandStDevP2 = 0
+#         ChosenDemandCVP1 = 0
+#         ChosenDemandCVP2 = 0
+#         #st.write(f"You choose {chosenDemand} Fixed Demand for each customer and each product")
+#         if chosencusts> 1:
+#             with right_column6:
+#                 values_P2 = st.slider(
+#                 'Select a range of values',
+#                 0.0, 100.0, (25.0, 75.0))
+#                 st.write('Demand for Product 1 is uniformly distributed between:', values_P2)
+# #For debug
+# # chosenprodstages = 1
+# # chosentime = 20
+# # ChosenStartsP1 = 10
+# # ChosenStartsP2 = 10
+# # ChosenDemandP1 = 10
+# # ChosenDemandP2 = 0
+# # ChosenDemandStDevP2 = 0
+# # ChosenDemandStDevP1 = 0
+# # chosenprods = 1
+# # chosencusts = 1
+# # IntialInv1 = 20
+# # IntialInv2 = 0
+# if Select_DemandStrategy == 'Normal Distibution':
+#     ChosenDemandStDevP1 = ChosenDemandCVP1 * ChosenDemandP1
+#     ChosenDemandStDevP2 = ChosenDemandCVP2 * ChosenDemandP2
 # create supply datafrme
 
 # WIP_names=["Stage 1","Stage 2","Stage 3","Stage 4"]
