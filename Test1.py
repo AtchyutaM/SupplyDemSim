@@ -71,7 +71,7 @@ st.image(image, caption='Choosen Production System')
 
 st.header('Processing time Parameters:')  
 
-left_column, middle_column, right_column = st.columns(2)
+left_column, middle_column, right_column = st.columns(3)
 st.header('Machine 1 Parameters:')  
 with left_column:
     t10 =  st.slider(
