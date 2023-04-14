@@ -47,7 +47,7 @@ st.write('Version 1.2')
 
 
 #Select Parameters
-st.header('Select Parameters:') 
+st.header('Select your system:') 
 
 left_column, right_column = st.columns(2)
 # You can use a column just like st.sidebar:
@@ -66,9 +66,32 @@ if chosenprodstages == "2":
 
 if chosenprodstages == "3":    
      image = Image.open('3_Prod_Sys.PNG')
-     
-     
+    
 st.image(image, caption='Choosen Production System')
+
+st.header('Machine 1 Parameters:')  
+
+left_column2, right_column2 = st.columns(2)
+with left_column2:
+    t10 =  st.slider(
+    'Natural Processing time for M1 in mins',
+    0, 100)
+    c10 =  st.slider(
+    'CV of Natural Processing time for M1',
+    0, 1)
+    st.write('Select PM related paramters')
+    N1s =  st.slider(
+    'Average Number of units between PMs:',
+    0,50)
+    t1s =  st.slider(
+    'Avearge Processing time for Pms on M1 in mins:',
+    0,50)
+    c1s =  st.slider(
+    'CV for Pms on M1s:',
+    0,2)
+    
+    
+
 
 
 # with right_column:
