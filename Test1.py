@@ -22,7 +22,7 @@ def selected2(url):
 
 # Streamlit
 st.title('A Simple Supply Chain Dynamics Simulator')
-st.write('Version 1.1')
+st.write('Version 1.2')
 
 #Sidebar Selections:
 Select_FillPolicy = st.sidebar.selectbox(
