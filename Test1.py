@@ -71,9 +71,9 @@ st.image(image, caption='Choosen Production System')
 
 st.header('Processing time Parameters:')  
 
-left_column2, right_column2 = st.columns(2)
+left_column, middle_column, right_column = st.columns(2)
 st.header('Machine 1 Parameters:')  
-with left_column2:
+with left_column:
     t10 =  st.slider(
     'Natural Processing time for M1 in mins',
     0, 100)
@@ -91,7 +91,7 @@ with left_column2:
     'CV for Pms on M1s:',
     0,2)
     if chosenprodstages == "2" or "3":
-        with right_column:
+        with middle_column:
             t20 =  st.slider(
             'Natural Processing time for M2 in mins',
             0, 100)
