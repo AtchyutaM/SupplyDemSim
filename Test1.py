@@ -93,7 +93,7 @@ with left_column:
     0,2)
     if chosenprodstages == "2":
         with middle_column:
-            st.header('Machine 2 Parameters:')  
+            st.write('Machine 2 Parameters:')  
             t20 =  st.slider(
             'Natural Processing time for M2 in mins',
             0, 100)
@@ -112,7 +112,7 @@ with left_column:
             0,2)
     if chosenprodstages == "3":
         with middle_column:
-            st.header('Machine 2 Parameters:')  
+            st.write('Machine 2 Parameters:')  
             t20 =  st.slider(
             'Natural Processing time for M2 in mins',
             0, 100)
@@ -130,7 +130,7 @@ with left_column:
             'CV for Pms on M2:',
             0,2)
         with right_column:
-            st.header('Machine 1 Parameters:')  
+            st.write('Machine 3 Parameters:')  
             t30 =  st.slider(
             'Natural Processing time for M3 in mins',
             0, 100)
