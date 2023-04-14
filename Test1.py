@@ -74,7 +74,7 @@ st.header('Processing time Parameters:')
 left_column, middle_column, right_column = st.columns(3)
 
 with left_column:
-    st.header('Machine 1 Parameters:')  
+    st.write('Machine 1 Parameters:')  
     t10 =  st.slider(
     'Natural Processing time for M1 in mins',
     0, 100)
