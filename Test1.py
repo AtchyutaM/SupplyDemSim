@@ -69,9 +69,10 @@ if chosenprodstages == "3":
     
 st.image(image, caption='Choosen Production System')
 
-st.header('Machine 1 Parameters:')  
+st.header('Processing time Parameters:')  
 
 left_column2, right_column2 = st.columns(2)
+st.header('Machine 1 Parameters:')  
 with left_column2:
     t10 =  st.slider(
     'Natural Processing time for M1 in mins',
@@ -81,7 +82,7 @@ with left_column2:
     0, 1)
     st.write('Select PM related paramters')
     N1s =  st.slider(
-    'Average Number of units between PMs:',
+    'Average Number of units between PMs on M1:',
     0,50)
     t1s =  st.slider(
     'Avearge Processing time for Pms on M1 in mins:',
@@ -89,6 +90,43 @@ with left_column2:
     c1s =  st.slider(
     'CV for Pms on M1s:',
     0,2)
+    if chosenprodstages == "2" or "3":
+        with right_column:
+            t20 =  st.slider(
+            'Natural Processing time for M2 in mins',
+            0, 100)
+            c20 =  st.slider(
+            'CV of Natural Processing time for M2',
+            0, 1)
+            st.write('Select PM related paramters')
+            N2s =  st.slider(
+            'Average Number of units between PMs on M2:',
+            0,50)
+            t2s =  st.slider(
+            'Avearge Processing time for PMs on M2 in mins:',
+            0,50)
+            c2s =  st.slider(
+            'CV for Pms on M2:',
+            0,2)
+    if chosenprodstages == "3":
+        with right_column:
+            t30 =  st.slider(
+            'Natural Processing time for M3 in mins',
+            0, 100)
+            c30 =  st.slider(
+            'CV of Natural Processing time for M3',
+            0, 1)
+            st.write('Select PM related paramters')
+            N3s =  st.slider(
+            'Average Number of units between PMs on M3:',
+            0,50)
+            t3s =  st.slider(
+            'Avearge Processing time for PMs on M3 in mins:',
+            0,50)
+            c3s =  st.slider(
+            'CV for Pms on M3:',
+            0,2)
+    
     
     
 
