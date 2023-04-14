@@ -28,10 +28,10 @@ st.write('Version 1.2')
 #Sidebar Selections:
 
 
-Select_DemandStrategy = st.sidebar.selectbox(
-  'Select Demand',
-    ( 'Fixed Demand','Normal Distibution','Uniform Distribution')
-)
+# Select_DemandStrategy = st.sidebar.selectbox(
+#   'Select Demand',
+#     ( 'Fixed Demand','Normal Distibution','Uniform Distribution')
+# )
 
 # Granular Mode
 # st.header('Select Mode:')
@@ -56,11 +56,19 @@ with left_column:
         'Choose Number of Serial Production Stages',
         ("1", "2", "3"))
     selected(f"You choose {chosenprodstages} Production Stages")
-    
 
-image = Image.open('100_200_Inv.png')
 
-st.image(image, caption='Sunrise by the mountains')
+if chosenprodstages == "1":    
+     image = Image.open('1_Prod_Sys.png')
+
+if chosenprodstages == "2":    
+     image = Image.open('2_Prod_Sys.png')
+
+if chosenprodstages == "3":    
+     image = Image.open('3_Prod_Sys.png')
+     
+     
+st.image(image, caption='Choosen Production System')
 
 
 # with right_column:
