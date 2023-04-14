@@ -59,13 +59,13 @@ with left_column:
 
 
 if chosenprodstages == "1":    
-     image = Image.open('1_Prod_Sys.png')
+     image = Image.open('1_Prod_Sys.PNG')
 
 if chosenprodstages == "2":    
-     image = Image.open('2_Prod_Sys.png')
+     image = Image.open('2_Prod_Sys.PNG')
 
 if chosenprodstages == "3":    
-     image = Image.open('3_Prod_Sys.png')
+     image = Image.open('3_Prod_Sys.PNG')
      
      
 st.image(image, caption='Choosen Production System')
