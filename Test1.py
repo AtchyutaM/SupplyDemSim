@@ -90,7 +90,7 @@ with left_column:
     c1s =  st.slider(
     'CV for Pms on M1s:',
     0,2)
-    if chosenprodstages == "2" or "3":
+    if chosenprodstages == "2":
         with middle_column:
             t20 =  st.slider(
             'Natural Processing time for M2 in mins',
