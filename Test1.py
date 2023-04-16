@@ -76,11 +76,11 @@ left_column, middle_column, right_column = st.columns(3)
 with left_column:
     st.write('Machine 1 Parameters:')  
     t10 =  st.slider(
-    'Natural Processing time for M1 in mins',
+    'Mean Processing time for M1 in mins',
     0, 100)
     c10 =  st.slider(
-    'CV of Natural Processing time for M1',
-    0, 1)
+    'CV of Processing time for M1',
+    0.0, 1.0)
     st.write('Select PM related paramters')
     N1s =  st.slider(
     'Average Number of units between PMs on M1:',
@@ -89,17 +89,17 @@ with left_column:
     'Avearge Processing time for Pms on M1 in mins:',
     0,50)
     c1s =  st.slider(
-    'CV for Pms on M1s:',
-    0,2)
+    'CV for PMs on M1s:',
+    0.0,2.0)
     if chosenprodstages == "2":
         with middle_column:
             st.write('Machine 2 Parameters:')  
             t20 =  st.slider(
-            'Natural Processing time for M2 in mins',
+            'Mean Processing time for M2 in mins',
             0, 100)
             c20 =  st.slider(
-            'CV of Natural Processing time for M2',
-            0, 1)
+            'CV of Processing time for M2',
+            0.0, 2.0)
             st.write('Select PM related paramters')
             N2s =  st.slider(
             'Average Number of units between PMs on M2:',
@@ -108,17 +108,17 @@ with left_column:
             'Avearge Processing time for PMs on M2 in mins:',
             0,50)
             c2s =  st.slider(
-            'CV for Pms on M2:',
-            0,2)
+            'CV for PMs on M2:',
+            0.0,2.0)
     if chosenprodstages == "3":
         with middle_column:
             st.write('Machine 2 Parameters:')  
             t20 =  st.slider(
-            'Natural Processing time for M2 in mins',
+            'Mean Processing time for M2 in mins',
             0, 100)
             c20 =  st.slider(
-            'CV of Natural Processing time for M2',
-            0, 1)
+            'CV of Processing time for M2',
+            0.1, 2.0)
             st.write('Select PM related paramters')
             N2s =  st.slider(
             'Average Number of units between PMs on M2:',
@@ -127,16 +127,16 @@ with left_column:
             'Avearge Processing time for PMs on M2 in mins:',
             0,50)
             c2s =  st.slider(
-            'CV for Pms on M2:',
-            0,2)
+            'CV for PMs on M2:',
+            0,2.0)
         with right_column:
             st.write('Machine 3 Parameters:')  
             t30 =  st.slider(
-            'Natural Processing time for M3 in mins',
+            'Mean Processing time for M3 in mins',
             0, 100)
             c30 =  st.slider(
-            'CV of Natural Processing time for M3',
-            0, 1)
+            'CV of Processing time for M3',
+            0.0, 2.0)
             st.write('Select PM related paramters')
             N3s =  st.slider(
             'Average Number of units between PMs on M3:',
@@ -145,8 +145,8 @@ with left_column:
             'Avearge Processing time for PMs on M3 in mins:',
             0,50)
             c3s =  st.slider(
-            'CV for Pms on M3:',
-            0,2)
+            'CV for PMs on M3:',
+            0.0,2.0)
     
     
     
