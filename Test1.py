@@ -81,7 +81,7 @@ with left_column:
     c10 =  st.slider(
     'CV of Processing time for M1',
     0.0, 2.0)
-    st.write('Select PM related paramters')
+    st.write('Select PM related paramters:')
     N1s =  st.slider(
     'Average Number of units between PMs on M1:',
     0,50)
@@ -98,7 +98,7 @@ with left_column:
         te1 = t10 + t1s/N1s
         sige1 = pow(sig10**2 + (sig1s**2/N1s) + (((N1s-1)/N1s**2)*t1s**2),0.5)
         c1e = sige1/te1
-        st.write(f"The effective processing time for M1 is {round(te1,2)} mins with a CV of {round(c1e,2)}")
+        selected2(f"The effective processing time for M1 is {round(te1,2)} mins with a CV of {round(c1e,2)}")
     
 
     
@@ -111,7 +111,7 @@ with left_column:
             c20 =  st.slider(
             'CV of Processing time for M2',
             0.0, 2.0)
-            st.write('Select PM related paramters')
+            st.write('Select PM related paramters:')
             N2s =  st.slider(
             'Average Number of units between PMs on M2:',
             0,50)
@@ -127,7 +127,7 @@ with left_column:
                 te2 = t20 + t2s/N2s
                 sige2 = pow(sig20**2 + (sig2s**2/N2s) + (((N2s-1)/N2s**2)*t2s**2),0.5)
                 c2e = sige2/te2
-                st.write(f"The effective processing time for M2 is {round(te2,2)} mins with a CV of {round(c2e,2)}")
+                selected2(f"The effective processing time for M2 is {round(te2,2)} mins with a CV of {round(c2e,2)}")
             
     if chosenprodstages == "3":
         with middle_column:
@@ -154,7 +154,7 @@ with left_column:
                 te2 = t20 + t2s/N2s
                 sige2 = pow(sig20**2 + (sig2s**2/N2s) + (((N2s-1)/N2s**2)*t2s**2),0.5)
                 c2e = sige2/te2
-                st.write(f"The effective processing time for M2 is {round(te2,2)} mins with a CV of {round(c2e,2)}")
+                selected2(f"The effective processing time for M2 is {round(te2,2)} mins with a CV of {round(c2e,2)}")
         with right_column:
             st.write('Machine 3 Parameters:')  
             t30 =  st.slider(
@@ -163,7 +163,7 @@ with left_column:
             c30 =  st.slider(
             'CV of Processing time for M3',
             0.0, 2.0)
-            st.write('Select PM related paramters')
+            st.write('Select PM related paramters:')
             N3s =  st.slider(
             'Average Number of units between PMs on M3:',
             0,50)
@@ -179,7 +179,7 @@ with left_column:
                 te3 = t30 + t3s/N3s
                 sige3 = pow(sig30**2 + (sig3s**2/N3s) + (((N3s-1)/N3s**2)*t3s**2),0.5)
                 c3e = sige3/te3
-                st.write(f"The effective processing time for M3 is {round(te3,2)} mins with a CV of {round(c3e,2)}")    
+                selected2(f"The effective processing time for M3 is {round(te3,2)} mins with a CV of {round(c3e,2)}")    
     
     
 
