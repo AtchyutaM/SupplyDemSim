@@ -202,9 +202,9 @@ with left_column2:
     u1 = t1e/t1a
     c1d = pow((((u1**2)*(c1e**2)) + ((1-u1**2)*(c1a**2))) ,0.5)
     u1 = t1e/t1a
-    selected2(f"The Utilization at M1: {u1}")
+    selected2(f"The Utilization at M1: {round(u1,2)}")
     selected2(f"The effective processing time for M1 is {round(t1e,2)} mins with a CV of {round(c1e,2)}")
-    selected2(f"The CV of departures at M1: {c1d}")
+    selected2(f"The CV of departures at M1: {round(c1d,2)}")
 
     if chosenprodstages == "2":
         with middle_column2:
@@ -212,9 +212,9 @@ with left_column2:
             c2a = c1d
             u2 = t2e/t2a            
             c2d = pow((((u2**2)*(c2e**2)) + ((1-u2**2)*(c2a**2))) ,0.5) 
-            selected2("Mean time between arrivals at M2 in mins:")
+            st.write("Mean time between arrivals at M2 in mins:")
             selected2(f"{round(t2a,2)}")
-            selected2("The CV of arrivals at M2:")
+            st.write("The CV of arrivals at M2:")
             selected2(f"{round(c1d,2)}")
             selected2(f"The Utilization at M2: {round(u2,2)}") 
             selected2(f"The effective processing time for M2 is {round(t2e,2)} mins with a CV of {round(c2e,2)}")
@@ -223,12 +223,12 @@ with left_column2:
     if chosenprodstages == "3":
         with middle_column2:  
             t2a = max (t1e,t1a)
-            c2a = c1d            
-            u2 = t2e/t2a           
-            c2d = pow((((u2**2)*(c2e**2)) + ((1-u2**2)*(c2a**2))) ,0.5)             
-            selected2("Mean time between arrivals at M2 in mins:")
+            c2a = c1d
+            u2 = t2e/t2a            
+            c2d = pow((((u2**2)*(c2e**2)) + ((1-u2**2)*(c2a**2))) ,0.5) 
+            st.write("Mean time between arrivals at M2 in mins:")
             selected2(f"{round(t2a,2)}")
-            selected2("The CV of arrivals at M2:")
+            st.write("The CV of arrivals at M2:")
             selected2(f"{round(c1d,2)}")
             selected2(f"The Utilization at M2: {round(u2,2)}") 
             selected2(f"The effective processing time for M2 is {round(t2e,2)} mins with a CV of {round(c2e,2)}")
@@ -238,9 +238,9 @@ with left_column2:
             c3a = c2d            
             u3 = t3e/t3a            
             c3d = pow((((u3**2)*(c3e**2)) + ((1-u3**2)*(c3a**2))) ,0.5) 
-            selected2("Mean time between arrivals at M3 in mins:")
+            st.write("Mean time between arrivals at M3 in mins:")
             selected2(f"{round(t3a,2)}")
-            selected2("The CV of arrivals at M2:")
+            st.write("The CV of arrivals at M2:")
             selected2(f"{round(c1d,2)}")
             selected2(f"The Utilization at M3: {round(u3,2)}") 
             selected2(f"The effective processing time for M23is {round(t3e,2)} mins with a CV of {round(c3e,2)}")
