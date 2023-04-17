@@ -323,13 +323,13 @@ with left_column4:
         CTfac1 = CT1/t10
         if CTfac1 > 1.5:
             st.write(f'The total cycle time at M1 is {round(CTfac1,2)} times its natural processing time')
-    if chosenprodstages == "2" and t1a >0:
+    if chosenprodstages == "2" and t1a >0 and t20 >0:
         with middle_column4:
             st.write('At Machine 2:')
             CTfac2 = CT2/t20
             if CTfac2 > 1.5:
                 st.write(f'The total cycle time at M2 is {round(CTfac2,2)} times its natural processing time')      
-    if chosenprodstages == "3" and t1a >0:        
+    if chosenprodstages == "3" and t1a >0 and t20 >0 and t30 >0:        
         with middle_column4:
             st.write('At Machine 2:')
             CTfac2 = CT2/t20
