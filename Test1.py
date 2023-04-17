@@ -185,16 +185,8 @@ with left_column:
     
     
 st.header('Input Paramters:') 
-st.write('Arrrivals at machine 1:')  
-t1a =  st.slider(
-    'Mean time between arrivals at M1 in mins:',
-    0, 100)
-c1a =  st.slider(
-    'CV of arrivals at M1:',
-    0.0, 2.0)
 
-u1 = t1e/t1a
-c1d = pow((((u1**2)*(c1e**2)) + ((1-u1**2)*(c1a**2))) ,0.5) 
+
 
 
 
@@ -207,6 +199,8 @@ with left_column2:
     c1a =  st.slider(
     'CV of arrivals at M1:',
     0.0, 2.0)
+    u1 = t1e/t1a
+    c1d = pow((((u1**2)*(c1e**2)) + ((1-u1**2)*(c1a**2))) ,0.5)
     u1 = t1e/t1a
     selected2(f"The Utilization at M1: {u1}")
     selected2(f"The effective processing time for M1 is {round(t1e,2)} mins with a CV of {round(c1e,2)}")
