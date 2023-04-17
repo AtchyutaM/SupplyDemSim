@@ -231,7 +231,7 @@ with left_column2:
             if u2<=1:
                 selected2(f"The CV of departures at M2: {round(c2d,2)}")
             if u2>1:
-                selected2(f"The CV of departures at M2: utilization is above 1!!")   
+                selected2("The CV of departures at M2: utilization is above 1!!")   
             
     if chosenprodstages == "3" and t1a >0:
         with middle_column2: 
@@ -249,7 +249,7 @@ with left_column2:
             if u2<=1:
                 selected2(f"The CV of departures at M2: {round(c2d,2)}")
             if u2>1:
-                selected2(f"The CV of departures at M2: utilization is above 1!!")   
+                selected2("The CV of departures at M2: utilization is above 1!!")   
         with right_column2:
             st.write('At Machine 3:') 
             t3a = max (t2e,t2a)
@@ -265,7 +265,7 @@ with left_column2:
             if u3<=1:
                 selected2(f"The CV of departures at M3: {round(c3d,2)}")
             if u3>1:
-                selected2(f"The CV of departures at M3: utilization is above 1!!")                
+                selected2("The CV of departures at M3: utilization is above 1!!")                
             
 st.header('Performance Measures:')
 st.write('This section calculates and presents the performance measures at each machine') 
@@ -287,11 +287,26 @@ with left_column3:
             WIP2 = u2/(1-u2)
             CT2q = ((c2a**2+c2e**2)/2) * WIP2 * t2e
             CT2 = CT2q + t2e
-            selected2(f"Expected WIP at M3: {round(WIP1,0)}") 
-            selected2(f"Expected cycle time in Queue in mins: {round(CTq1,0)}")
-            selected2(f"Expected total cycle time in mins: {round(CT1,0)}")      
+            selected2(f"Expected WIP at M2: {round(WIP2,0)}") 
+            selected2(f"Expected cycle time in Queue in mins: {round(CT2q,0)}")
+            selected2(f"Expected total cycle time in mins: {round(CT2,0)}")      
     if chosenprodstages == "3" and t1a >0:        
-        
+        with middle_column2:
+            st.write('At Machine 2:')
+            WIP2 = u2/(1-u2)
+            CT2q = ((c2a**2+c2e**2)/2) * WIP2 * t2e
+            CT2 = CT2q + t2e
+            selected2(f"Expected WIP at M2: {round(WIP2,0)}") 
+            selected2(f"Expected cycle time in Queue in mins: {round(CT2q,0)}")
+            selected2(f"Expected total cycle time in mins: {round(CT2,0)}")
+        with middle_column3:
+            st.write('At Machine 3:')
+            WIP3 = u3/(1-u3)
+            CT3q = ((c3a**2+c3e**2)/2) * WIP3 * t3e
+            CT3 = CT3q + t3e
+            selected2(f"Expected WIP at M3: {round(WIP3,0)}") 
+            selected2(f"Expected cycle time in Queue in mins: {round(CT3q,0)}")
+            selected2(f"Expected total cycle time in mins: {round(CT3,0)}")  
     
 
 
