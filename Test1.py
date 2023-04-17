@@ -98,8 +98,9 @@ with left_column:
         te1 = t10 + t1s/N1s
         sige1 = pow(sig10**2 + (sig1s**2/N1s) + (((N1s-1)/N1s**2)*t1s**2),0.5)
         c1e = sige1/te1
+        st.write(f"The effective processing time for M1 is {te1} mins with a CV of {c1e}")
     
-    st.write(f"The effective processing time for M1 is {te1} mins with a CV of {c1e}")
+
     
     if chosenprodstages == "2":
         with middle_column:
