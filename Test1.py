@@ -193,7 +193,7 @@ with left_column:
 st.header('Flow Paramters and Utilization:') 
 
 
-
+st.write("Select the arrival rate and its CV at M1 and the rest of the paramters for the system will get calcaulted in this section") 
 
 
 
@@ -249,7 +249,7 @@ with left_column2:
             st.write("The CV of arrivals at M2:")
             selected2(f"{round(c1d,2)}")
             selected2(f"The Utilization at M3: {round(u3,2)}") 
-            selected2(f"The effective processing time for M23is {round(t3e,2)} mins with a CV of {round(c3e,2)}")
+            selected2(f"The effective processing time for M3 is {round(t3e,2)} mins with a CV of {round(c3e,2)}")
             selected2(f"The CV of departures at M3: {round(c3d,2)}")
             
 
