@@ -286,7 +286,7 @@ with left_column3:
         selected2(f"Expected cycle time in Queue in mins: {round(CT1q,0)}")
         selected2(f"Expected total cycle time in mins: {round(CT1,0)}")
     if chosenprodstages == "3" and t1a >0:
-        with middle_column2:
+        with middle_column3:
             st.write('At Machine 2:')
             WIP2 = u2/(1-u2)
             CT2q = ((c2a**2+c2e**2)/2) * WIP2 * t2e
@@ -295,7 +295,7 @@ with left_column3:
             selected2(f"Expected cycle time in Queue in mins: {round(CT2q,0)}")
             selected2(f"Expected total cycle time in mins: {round(CT2,0)}")      
     if chosenprodstages == "3" and t1a >0:        
-        with middle_column2:
+        with middle_column3:
             st.write('At Machine 2:')
             WIP2 = u2/(1-u2)
             CT2q = ((c2a**2+c2e**2)/2) * WIP2 * t2e
