@@ -285,7 +285,7 @@ with left_column3:
         selected2(f"Expected WIP at M1: {round(WIP1,0)}") 
         selected2(f"Expected cycle time in Queue in mins: {round(CT1q,0)}")
         selected2(f"Expected total cycle time in mins: {round(CT1,0)}")
-    if chosenprodstages == "3" and t1a >0:
+    if chosenprodstages == "2" and t1a >0:
         with middle_column3:
             st.write('At Machine 2:')
             WIP2 = u2/(1-u2)
