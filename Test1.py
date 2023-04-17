@@ -137,7 +137,7 @@ with left_column:
             0,50)
             c2s =  st.slider(
             'CV for PMs on M2:',
-            0,2.0)
+            0.0,2.0)
         with right_column:
             st.write('Machine 3 Parameters:')  
             t30 =  st.slider(
