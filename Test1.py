@@ -184,6 +184,13 @@ with left_column:
                 selected2(f"The effective processing time for M3 is {round(t3e,2)} mins with a CV of {round(c3e,2)}")    
     
     
+st.header('Input Paramters:') 
+st.write('Arrrivals at machine 1:')  
+t1a =  st.slider(
+    'Mean time between arrivals at M1 in mins:',
+    0, 100)
+
+ 
 
 
 
