@@ -22,8 +22,10 @@ def selected2(url):
      st.markdown(f'<p style="color:#33ff33;font-size:14px;border-radius:2%;">{url}</p>', unsafe_allow_html=True)
 
 # Streamlit
-st.title('A Simple Supply Chain Dynamics Simulator')
-st.write('Version 1.2')
+st.title('A Simple Production System to showcase the impact of Varibility on System Performance')
+st.write('Version 1.0')
+
+st.write('The impact of vaiability on a production system performance can be hard to grasp intutively. This app uses concepts from Factory Physics to compute and present performance metrics of a simple production system.')
 
 #Sidebar Selections:
 
