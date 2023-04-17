@@ -330,7 +330,7 @@ st.write('This section presents interesting insights about the system performanc
 
 left_column4, middle_column4, right_column4 = st.columns(3)
 with left_column4:
-    if t1a >0 and u1<=1:
+    if t1a >0 and u1<=1 and t10>0:
         st.write('At Machine 1:')
         CTfac1 = CT1/t10
         if CTfac1 > 1.5:
