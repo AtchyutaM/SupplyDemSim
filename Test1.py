@@ -235,7 +235,7 @@ with left_column2:
             selected2(f"The Utilization at M2: {u2}") 
             selected2(f"The effective processing time for M2 is {round(t2e,2)} mins with a CV of {round(c2e,2)}")
             selected2(f"The CV of departures at M2: {c2d}")
-        with right_column:
+        with right_column2:
             t3a = max (t2e,t2a)
             c3a = c2d            
             u3 = t3e/t3a            
