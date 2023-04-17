@@ -92,11 +92,12 @@ with left_column:
     'CV for PMs on M1s:',
     0.0,2.0)
     
-    sig10 = t10*c10
-    sig1s = t1s*c1s
-    te1 = t10 + t1s/N1s
-    sige1 = pow(sig10**2 + (sig1s**2/N1s) + (((N1s-1)/N1s**2)*t1s**2),0.5)
-    c1e = sige1/te1
+    if N1s >0 and t1s >0:
+        sig10 = t10*c10
+        sig1s = t1s*c1s
+        te1 = t10 + t1s/N1s
+        sige1 = pow(sig10**2 + (sig1s**2/N1s) + (((N1s-1)/N1s**2)*t1s**2),0.5)
+        c1e = sige1/te1
     
     st.write(f"The effective processing time for M1 is {te1} mins with a CV of {c1e}")
     
