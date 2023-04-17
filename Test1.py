@@ -281,7 +281,7 @@ st.write('This section calculates and presents the performance measures at each 
 left_column3, middle_column3, right_column3 = st.columns(3)
 with left_column3:
     if t1a >0 :
-        if u1<=1:
+        if u1<1:
             st.write('At Machine 1:')
             WIP1 = u1/(1-u1)
             CT1q = ((c1a**2+c1e**2)/2) * WIP1 * t1e
@@ -289,8 +289,8 @@ with left_column3:
             selected2(f"Expected WIP at M1: {round(WIP1,0)}") 
             selected2(f"Expected cycle time in Queue in mins: {round(CT1q,0)}")
             selected2(f"Expected total cycle time in mins: {round(CT1,0)}")
-        if u1>1:
-            selected2("Utilization is above 1!!")  
+        if u1>=1:
+            selected2("Utilization is greater than or equal to 1!!")  
     if chosenprodstages == "2" and t1a >0:
         with middle_column3:
             if u2>1:
@@ -306,7 +306,7 @@ with left_column3:
     if chosenprodstages == "3" and t1a >0:        
         with middle_column3:
             if u2>1:
-                selected2("Utilization is above 1!!") 
+                selected2("Utilization is greater than or equal to 1!!") 
             if u2<=1:
                 st.write('At Machine 2:')
                 WIP2 = u2/(1-u2)
@@ -317,7 +317,7 @@ with left_column3:
                 selected2(f"Expected total cycle time in mins: {round(CT2,0)}")
         with right_column3:
             if u3>1:
-                selected2("Utilization is above 1!!")
+                selected2("Utilization is greater than or equal to 1!!")
             if u3<=1:
                 st.write('At Machine 3:')
                 WIP3 = u3/(1-u3)
