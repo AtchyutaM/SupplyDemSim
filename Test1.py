@@ -303,7 +303,7 @@ with left_column3:
             selected2(f"Expected WIP at M2: {round(WIP2,0)}") 
             selected2(f"Expected cycle time in Queue in mins: {round(CT2q,0)}")
             selected2(f"Expected total cycle time in mins: {round(CT2,0)}")
-        with middle_column3:
+        with right_column3:
             st.write('At Machine 3:')
             WIP3 = u3/(1-u3)
             CT3q = ((c3a**2+c3e**2)/2) * WIP3 * t3e
