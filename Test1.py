@@ -333,18 +333,18 @@ st.write('This section presents interesting insights about the system performanc
 
 left_column4, middle_column4, right_column4 = st.columns(3)
 with left_column4:
-    if t1a >0 and u1<=1 and t10>0:
+    if t1a >0 and u1<1 and t10>0:
         st.write('At Machine 1:')
         CTfac1 = CT1/t10
         if CTfac1 > 1.5:
             st.write(f'The total cycle time at M1 is {round(CTfac1,2)} times its natural processing time')
-    if chosenprodstages == "2" and t1a >0 and t20 >0 and u2 <=1:
+    if chosenprodstages == "2" and t1a >0 and t20 >0 and u2 <1:
         with middle_column4:
             st.write('At Machine 2:')
             CTfac2 = CT2/t20
             if CTfac2 > 1.5:
                 st.write(f'The total cycle time at M2 is {round(CTfac2,2)} times its natural processing time')      
-    if chosenprodstages == "3" and t1a >0 and t20 >0 and t30 >0 and u2<=1 and u3<=1:        
+    if chosenprodstages == "3" and t1a >0 and t20 >0 and t30 >0 and u2<1 and u3<1:        
         with middle_column4:
             st.write('At Machine 2:')
             CTfac2 = CT2/t20
