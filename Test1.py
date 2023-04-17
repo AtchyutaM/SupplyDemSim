@@ -193,12 +193,13 @@ with left_column:
 st.header('Flow Paramters and Utilization:') 
 
 
-st.write("Select the arrival rate and its CV at M1 and the rest of the paramters for the system will get calcaulted in this section") 
+st.write("Select the arrival rate and its CV at M1 and the rest of the paramters for the system will get calcaulted in this section.") 
 
 
 
 left_column2, middle_column2, right_column2 = st.columns(3)
 with left_column2:
+    st.write('At Machine 1:') 
     t1a =  st.slider(
     'Mean time between arrivals at M1 in mins:',
     0, 100)
@@ -214,6 +215,7 @@ with left_column2:
 
     if chosenprodstages == "2":
         with middle_column2:
+            st.write('At Machine 2:') 
             t2a = max (t1e,t1a)
             c2a = c1d
             u2 = t2e/t2a            
@@ -227,7 +229,8 @@ with left_column2:
             selected2(f"The CV of departures at M2: {round(c2d,2)}")
             
     if chosenprodstages == "3":
-        with middle_column2:  
+        with middle_column2: 
+            st.write('At Machine 2:') 
             t2a = max (t1e,t1a)
             c2a = c1d
             u2 = t2e/t2a            
@@ -240,6 +243,7 @@ with left_column2:
             selected2(f"The effective processing time for M2 is {round(t2e,2)} mins with a CV of {round(c2e,2)}")
             selected2(f"The CV of departures at M2: {round(c2d,2)}")
         with right_column2:
+            st.write('At Machine 3:') 
             t3a = max (t2e,t2a)
             c3a = c2d            
             u3 = t3e/t3a            
