@@ -84,10 +84,10 @@ with left_column:
     st.write('Select PM related paramters:')
     N1s =  st.slider(
     'Average Number of units between PMs on M1:',
-    0,50)
+    0,100)
     t1s =  st.slider(
     'Avearge Processing time for Pms on M1 in mins:',
-    0,50)
+    0,100)
     c1s =  st.slider(
     'CV for PMs on M1s:',
     0.0,2.0)
@@ -114,10 +114,10 @@ with left_column:
             st.write('Select PM related paramters:')
             N2s =  st.slider(
             'Average Number of units between PMs on M2:',
-            0,50)
+            0,100)
             t2s =  st.slider(
             'Avearge Processing time for PMs on M2 in mins:',
-            0,50)
+            0,100)
             c2s =  st.slider(
             'CV for PMs on M2:',
             0.0,2.0)
@@ -141,10 +141,10 @@ with left_column:
             st.write('Select PM related paramters')
             N2s =  st.slider(
             'Average Number of units between PMs on M2:',
-            0,50)
+            0,100)
             t2s =  st.slider(
             'Avearge Processing time for PMs on M2 in mins:',
-            0,50)
+            0,100)
             c2s =  st.slider(
             'CV for PMs on M2:',
             0.0,2.0)
@@ -168,10 +168,10 @@ with left_column:
             st.write('Select PM related paramters:')
             N3s =  st.slider(
             'Average Number of units between PMs on M3:',
-            0,50)
+            0,100)
             t3s =  st.slider(
             'Avearge Processing time for PMs on M3 in mins:',
-            0,50)
+            0,100)
             c3s =  st.slider(
             'CV for PMs on M3:',
             0.0,2.0)
