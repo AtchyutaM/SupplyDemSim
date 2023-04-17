@@ -247,7 +247,7 @@ with left_column2:
             st.write("Mean time between arrivals at M2 in mins:")
             selected2(f"{round(t2a,2)}")
             st.write("The CV of arrivals at M2:")
-            selected2(f"{round(c1d,2)}")
+            selected2(f"{round(c2a,2)}")
             selected2(f"The Utilization at M2: {round(u2,2)}") 
             selected2(f"The effective processing time for M2 is {round(t2e,2)} mins with a CV of {round(c2e,2)}")
             if u2<=1:
@@ -263,7 +263,7 @@ with left_column2:
             st.write("Mean time between arrivals at M3 in mins:")
             selected2(f"{round(t3a,2)}")
             st.write("The CV of arrivals at M2:")
-            selected2(f"{round(c1d,2)}")
+            selected2(f"{round(c3a,2)}")
             selected2(f"The Utilization at M3: {round(u3,2)}")
             selected2(f"The effective processing time for M3 is {round(t3e,2)} mins with a CV of {round(c3e,2)}")
             if u3<=1:
