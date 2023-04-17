@@ -189,6 +189,10 @@ st.write('Arrrivals at machine 1:')
 t1a =  st.slider(
     'Mean time between arrivals at M1 in mins:',
     0, 100)
+c1a =  st.slider(
+    'CV of arrivals at M1:',
+    0.0, 2.0)
+
 
  
 
