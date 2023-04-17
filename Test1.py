@@ -98,7 +98,7 @@ with left_column:
         te1 = t10 + t1s/N1s
         sige1 = pow(sig10**2 + (sig1s**2/N1s) + (((N1s-1)/N1s**2)*t1s**2),0.5)
         c1e = sige1/te1
-        st.markdown(f"The effective processing time for M1 is **:green[{round(te1,2)}]** mins with a CV of {round(c1e,2)}")
+        st.markdown("The effective processing time for M1 is **:green[{round(te1,2)}]** mins with a CV of {round(c1e,2)}")
     
 
     
