@@ -213,7 +213,11 @@ with left_column2:
         u1 = t1e/t1a
         selected2(f"The Utilization at M1: {round(u1,2)}")
         selected2(f"The effective processing time for M1 is {round(t1e,2)} mins with a CV of {round(c1e,2)}")
-        selected2(f"The CV of departures at M1: {round(c1d,2)}")
+        if u1<=1:
+            selected2(f"The CV of departures at M1: {round(c1d,2)}")
+        if u1>1:
+            selected2("The CV of departures at M2: Out of bounds, utilization is above 1!!")  
+
 
     if chosenprodstages == "2" and t1a >0:
         with middle_column2:
@@ -231,7 +235,7 @@ with left_column2:
             if u2<=1:
                 selected2(f"The CV of departures at M2: {round(c2d,2)}")
             if u2>1:
-                selected2("The CV of departures at M2: utilization is above 1!!")   
+                selected2("The CV of departures at M2: Out of bounds, utilization is above 1!!")   
             
     if chosenprodstages == "3" and t1a >0:
         with middle_column2: 
