@@ -121,6 +121,8 @@ with left_column:
             c2s =  st.slider(
             'CV for PMs on M2:',
             0.0,2.0)
+            t2e = t20
+            c2e = c20
             if N2s >0 and t2s >0:
                 sig20 = t20*c10
                 sig2s = t2s*c1s
@@ -148,6 +150,8 @@ with left_column:
             c2s =  st.slider(
             'CV for PMs on M2:',
             0.0,2.0)
+            t2e = t20
+            c2e = c20
             if N2s >0 and t2s >0:
                 sig20 = t20*c10
                 sig2s = t2s*c1s
@@ -175,6 +179,8 @@ with left_column:
             c3s =  st.slider(
             'CV for PMs on M3:',
             0.0,2.0)
+            t3e = t30
+            c3e = c30
             if N3s >0 and t3s >0:
                 sig30 = t30*c30
                 sig3s = t3s*c3s
@@ -184,7 +190,7 @@ with left_column:
                 selected2(f"The effective processing time for M3 is {round(t3e,2)} mins with a CV of {round(c3e,2)}")    
     
     
-st.header('Input Paramters:') 
+st.header('Flow Paramters and Utilization:') 
 
 
 
