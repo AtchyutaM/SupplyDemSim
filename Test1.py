@@ -25,7 +25,7 @@ def selected2(url):
 st.title('A Simple Production System to showcase the impact of Varibility on System Performance')
 st.write('Version 1.0')
 
-st.write('The impact of vaiability on a production system performance can be hard to grasp intutively. This app uses concepts from Factory Physics to compute and present performance metrics of a simple production system.')
+st.write('The impact of variability on the performance of a production system can be hard to grasp intutively. This app uses concepts from Factory Physics to compute and present performance metrics, in real time, of a simple production system based on user inputs.')
 
 #Sidebar Selections:
 
