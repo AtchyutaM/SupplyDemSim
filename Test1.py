@@ -91,7 +91,8 @@ with left_column:
     c1s =  st.slider(
     'CV for PMs on M1s:',
     0.0,2.0)
-    
+    t1e = t10
+    c1e = c10   
     if N1s >0 and t1s >0:
         sig10 = t10*c10
         sig1s = t1s*c1s
