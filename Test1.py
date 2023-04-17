@@ -262,8 +262,11 @@ with left_column2:
             c3d = pow((((u3**2)*(c3e**2)) + ((1-u3**2)*(c3a**2))) ,0.5) 
             st.write("Mean time between arrivals at M3 in mins:")
             selected2(f"{round(t3a,2)}")
-            st.write("The CV of arrivals at M2:")
-            selected2(f"{round(c3a,2)}")
+            st.write("The CV of arrivals at M3:")
+            if u2<=1:
+                selected2(f"{round(c3a,2)}")
+            if u2>1:
+                selected2("Utilization at M2 is above 1!!")
             selected2(f"The Utilization at M3: {round(u3,2)}")
             selected2(f"The effective processing time for M3 is {round(t3e,2)} mins with a CV of {round(c3e,2)}")
             if u3<=1:
