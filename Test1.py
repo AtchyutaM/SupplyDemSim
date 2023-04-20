@@ -347,7 +347,7 @@ with left_column4:
                 shadow=True, startangle=90)
         ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.       
         st.pyplot(fig1) 
-    if chosenprodstages == "2" and t1a >0 and t20 >0 and u2 <1:
+    if chosenprodstages == "2" and t1a >0 and t20 >0 and u2 <1 and N2s>0:
         with middle_column4:
             st.write('At Machine 2:')
             sizes = [t20, t2s/N2s, CT2q]
@@ -357,7 +357,7 @@ with left_column4:
                     shadow=True, startangle=90)
             ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.       
             st.pyplot(fig2)     
-    if chosenprodstages == "3" and t1a >0 and t20 >0 and t30 >0 and u2<1 and u3<1:  
+    if chosenprodstages == "3" and t1a >0 and t20 >0 and t30 >0 and u2<1 and u3<1 and N2s>0 and N3s>0:  
         with middle_column4:
             st.write('At Machine 2:')
             sizes = [t20, t2s/N2s, CT2q]
