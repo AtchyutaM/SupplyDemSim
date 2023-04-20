@@ -371,7 +371,7 @@ with left_column4:
 
 
 st.write('Complete System Processing time breakdown:')
-sizes = [t10+t20+t30,t1s/N1s+t2s/N2s+t3s/N3s, CT1q+CT2q+CT3q]
+sizes = [(t10+t20+t30),((t1s/N1s)+(t2s/N2s)+(t3s/N3s)), (CT1q+CT2q+CT3q)]
 explode = (0.1, 0, 0)  # only "explode" the 1st slice            
 fig4, ax4 = plt.subplots()
 ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
