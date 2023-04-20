@@ -432,26 +432,38 @@ left_column5, middle_column5, right_column5 = st.columns(3)
 with left_column5:
     if t1a >0 and u1<1 and t10>0:
         st.write('At Machine 1:')
+        u1exp = t10/t1a
+        if t1e>t10:
+            st.write(f'The expected utilization at M1 from natural PT alone is {round(u1exp,2)}. However, the actual utilization due to outages is {round(u1,2)}!')
         CTfac1 = CT1/t10
         if CTfac1 > 1.5:
             st.write(f'The total cycle time at M1 is {round(CTfac1,2)} times its natural processing time')
     if chosenprodstages == "2" and t1a >0 and t20 >0 and u2 <1:
         with middle_column5:
             st.write('At Machine 2:')
-            CTfac2 = CT2/t20
-            if CTfac2 > 1.5:
-                st.write(f'The total cycle time at M2 is {round(CTfac2,2)} times its natural processing time')      
+            u2exp = t20/t2a
+            if t2e>t20:
+                st.write(f'The expected utilization at M2 from natural PT alone is {round(u2exp,2)}. However, the actual utilization due to outages is {round(u2,2)}!')
+                CTfac2 = CT2/t20
+                if CTfac2 > 1.5:
+                    st.write(f'The total cycle time at M2 is {round(CTfac2,2)} times its natural processing time')      
     if chosenprodstages == "3" and t1a >0 and t20 >0 and t30 >0 and u2<1 and u3<1:        
         with middle_column5:
             st.write('At Machine 2:')
-            CTfac2 = CT2/t20
-            if CTfac2 > 1.5:
-                st.write(f'The total cycle time at M2 is {round(CTfac2,2)} times its natural processing time')     
+            u2exp = t20/t2a
+            if t2e>t20:
+                st.write(f'The expected utilization at M2 from natural PT alone is {round(u2exp,2)}. However, the actual utilization due to outages is {round(u2,2)}!')
+                CTfac2 = CT2/t20
+                if CTfac2 > 1.5:
+                    st.write(f'The total cycle time at M2 is {round(CTfac2,2)} times its natural processing time')     
         with right_column5:
             st.write('At Machine 3:')
-            CTfac3= CT3/t30
-            if CTfac3 > 1.5:
-                st.write(f'The total cycle time at M3 is {round(CTfac3,2)} times its natural processing time')
+            u3exp = t30/t3a
+            if t3e>t30:
+                st.write(f'The expected utilization at M3 from natural PT alone is {round(u3exp,2)}. However, the actual utilization due to outages is {round(u3,2)}!')
+                CTfac3= CT3/t30
+                if CTfac3 > 1.5:
+                    st.write(f'The total cycle time at M3 is {round(CTfac3,2)} times its natural processing time')
 
 
 
