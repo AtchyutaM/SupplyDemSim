@@ -336,10 +336,10 @@ st.write('This section breaks down the expected cycle time into its component pa
 
 left_column4, middle_column4, right_column4 = st.columns(3)
 with left_column4:
-    if t1a >0 and u1<1 and t10>0:
+    if t1a >0 and u1<1 and t10>0 and N1s>0:
         st.write('At Machine 1:')
         # Pie chart, where the slices will be ordered and plotted counter-clockwise:
-        labels = 'Natural PT', 'CTinQueue', 'Due to PMs'
+        labels = 'Natural PT', 'Due to PMs', 'CTinQueue'
         sizes = [t10, t1s/N1s, CT1q]
         explode = (0.1, 0, 0)  # only "explode" the 1st slice        
         fig1, ax1 = plt.subplots()
@@ -377,7 +377,7 @@ with left_column4:
             ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.       
             st.pyplot(fig3)   
 
-if chosenprodstages == "2" and t1a >0 and t20 >0 and u2 <1:
+if chosenprodstages == "2" and t1a >0 and t20 >0 and u2 <1 and N2s>0 and N1s>0:
         st.write('Complete System Processing time breakdown:')
         sizes = [(t10+t20),((t1s/N1s)+(t2s/N2s)), (CT1q+CT2q)]
         explode = (0.1, 0, 0)  # only "explode" the 1st slice            
@@ -388,7 +388,7 @@ if chosenprodstages == "2" and t1a >0 and t20 >0 and u2 <1:
         st.pyplot(fig4)  
 
 
-if chosenprodstages == "3" and t1a >0 and t20 >0 and t30 >0 and u2<1 and u3<1:
+if chosenprodstages == "3" and t1a >0 and t20 >0 and t30 >0 and u2<1 and u3<1 and N2s>0 and N1s>0 and N3s>0:
         st.write('Complete System Processing time breakdown:')
         sizes = [(t10+t20+t30),((t1s/N1s)+(t2s/N2s)+(t3s/N3s)), (CT1q+CT2q+CT3q)]
         explode = (0.1, 0, 0)  # only "explode" the 1st slice            
