@@ -404,7 +404,7 @@ if chosenprodstages == "2" and t1a >0 and t20 >0 and u2 <1:
         st.pyplot(fig4)  
 
 
-if chosenprodstages == "3" and t1a >0 and t20 >0 and t30 >0 and u2<1 and u3<1 and N2s>0 and N1s>0 and N3s>0:
+if chosenprodstages == "3" and t1a >0 and t20 >0 and t30 >0 and u2<1 and u3<1:
         st.write('Complete System Processing time breakdown:')
         if N1s>0:
             t1PM = t1s/N1s
