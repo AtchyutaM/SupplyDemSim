@@ -415,9 +415,9 @@ if chosenprodstages == "3" and t1a >0 and t20 >0 and t30 >0 and u2<1 and u3<1:
         sizes = [(t10+t20+t30),t1PM+t2PM+t3PM, (CT1q+CT2q+CT3q)]
         explode = (0.1, 0, 0)  # only "explode" the 1st slice            
         fig4, ax4 = plt.subplots()
-        ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+        ax4.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
                 shadow=True, startangle=90)
-        ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.       
+        ax4.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.       
         st.pyplot(fig4)  
 
 
