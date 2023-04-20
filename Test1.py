@@ -328,37 +328,99 @@ with left_column3:
                 selected2(f"Expected WIP at M3: {round(WIP3,0)}") 
                 selected2(f"Expected cycle time in Queue in mins: {round(CT3q,0)}")
                 selected2(f"Expected total cycle time in mins: {round(CT3,0)}")  
-
-st.header('Insights:')
-st.write('This section presents interesting insights about the system performance measures at each machine') 
+                
+                
+st.header('Charts:')
+st.write('This section breaks down the expected cycle time into its component parts.') 
 
 
 left_column4, middle_column4, right_column4 = st.columns(3)
 with left_column4:
     if t1a >0 and u1<1 and t10>0:
         st.write('At Machine 1:')
+        # Pie chart, where the slices will be ordered and plotted counter-clockwise:
+        labels = 'Natural PT', 'CTinQueue', 'Due to PMs'
+        sizes = [t10, t1s/N1s, CT1q]
+        explode = (0.1, 0, 0)  # only "explode" the 1st slice        
+        fig1, ax1 = plt.subplots()
+        ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+                shadow=True, startangle=90)
+        ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.       
+        st.pyplot(fig1) 
+    if chosenprodstages == "2" and t1a >0 and t20 >0 and u2 <1:
+        with middle_column4:
+            st.write('At Machine 2:')
+            sizes = [t20, t2s/N2s, CT2q]
+            explode = (0.1, 0, 0)  # only "explode" the 1st slice            
+            fig2, ax2 = plt.subplots()
+            ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+                    shadow=True, startangle=90)
+            ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.       
+            st.pyplot(fig2)     
+    if chosenprodstages == "3" and t1a >0 and t20 >0 and t30 >0 and u2<1 and u3<1:        
+        with middle_column4:
+            st.write('At Machine 2:')
+            sizes = [t30, t3s/N3s, CT3q]
+            explode = (0.1, 0, 0)  # only "explode" the 1st slice            
+            fig3, ax3 = plt.subplots()
+            ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+                    shadow=True, startangle=90)
+            ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.       
+            st.pyplot(fig3)   
+
+
+
+st.write('Complete System Processing time breakdown:')
+sizes = [t10+t20+t30,t1s/N1s+t2s/N2s+t3s/N3s, CT1q+CT2q+CT3q]
+explode = (0.1, 0, 0)  # only "explode" the 1st slice            
+fig4, ax4 = plt.subplots()
+ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+        shadow=True, startangle=90)
+ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.       
+st.pyplot(fig4)  
+
+
+
+st.header('Insights:')
+st.write('This section presents interesting insights about the system performance measures at each machine') 
+
+
+left_column5, middle_column5, right_column5 = st.columns(3)
+with left_column5:
+    if t1a >0 and u1<1 and t10>0:
+        st.write('At Machine 1:')
         CTfac1 = CT1/t10
         if CTfac1 > 1.5:
             st.write(f'The total cycle time at M1 is {round(CTfac1,2)} times its natural processing time')
     if chosenprodstages == "2" and t1a >0 and t20 >0 and u2 <1:
-        with middle_column4:
+        with middle_column5:
             st.write('At Machine 2:')
             CTfac2 = CT2/t20
             if CTfac2 > 1.5:
                 st.write(f'The total cycle time at M2 is {round(CTfac2,2)} times its natural processing time')      
     if chosenprodstages == "3" and t1a >0 and t20 >0 and t30 >0 and u2<1 and u3<1:        
-        with middle_column4:
+        with middle_column5:
             st.write('At Machine 2:')
             CTfac2 = CT2/t20
             if CTfac2 > 1.5:
                 st.write(f'The total cycle time at M2 is {round(CTfac2,2)} times its natural processing time')     
-        with right_column4:
+        with right_column5:
             st.write('At Machine 3:')
             CTfac3= CT3/t30
             if CTfac3 > 1.5:
                 st.write(f'The total cycle time at M3 is {round(CTfac3,2)} times its natural processing time')
 
-    
+# Pie chart, where the slices will be ordered and plotted counter-clockwise:
+labels = 'Natural PT', 'CTinQueue', 'Due to PMs'
+sizes = [15, 30, 45]
+explode = (0.1, 0, 0)  # only "explode" the 1st slice
+
+fig1, ax1 = plt.subplots()
+ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+        shadow=True, startangle=90)
+ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+
+st.pyplot(fig1)    
 
 
 
