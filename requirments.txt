@@ -1,0 +1,10 @@
+altair
+seaborn
+pandas
+matplotlib
+plotly
+numpy
+streamlit
+joblib
+Pillow
+scikit_learn
